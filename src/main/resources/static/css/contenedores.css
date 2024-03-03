@@ -1,0 +1,23 @@
+.contenedor-mediano {
+  max-width: 600px;
+  margin: 2em auto;
+  border-radius: 10px;
+  padding: 1.5em;
+  background-color: whitesmoke;
+}
+
+.contenedor-grande {
+  max-width: 800px;
+  margin: 2em auto;
+  border-radius: 10px;
+  padding: 1.5em;
+  background-color: whitesmoke;
+}
+
+.contenedor-extra-grande {
+  max-width: 1000px;
+  margin: 2em auto;
+  border-radius: 10px;
+  padding: 1.5em;
+  background-color: whitesmoke;
+}
