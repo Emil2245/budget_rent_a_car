@@ -3,7 +3,6 @@ package com.uce.edu.avanzada.budget_rent_a_car.controller;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import com.uce.edu.avanzada.budget_rent_a_car.service.to.ReservaClienteTO;
-import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/budget/clientes")
 public class ClienteController {
 
+    // http://localhost:8080/rentaCar/budget/clientes/inicioClientes
     @GetMapping("/inicioClientes")
     public String mostrarInicio(Model model, ReservaClienteTO reservaClienteTO) {
         model.addAttribute("reservaClienteTO", new ReservaClienteTO());
