@@ -20,9 +20,9 @@ public class ReservaController {
         // Si no el Vehiculo no esta disponible en las fechas dadas, devolver null;
 
 
-        // CUANDO NOOO ESTA DISPONIBLE (NULL)------
-        // Vehiculo vehiculoDisponibleEnFechas = null; // Aqui seria la llamada al metodo usando los valores de reservaClienteTO
-        //----------------------------------------
+//        //CUANDO NOOO ESTA DISPONIBLE (NULL)------
+//        Vehiculo vehiculoDisponibleEnFechas = null; // Aqui seria la llamada al metodo usando los valores de reservaClienteTO
+//        //----------------------------------------
 
 
         // CUANDO SI ESTA DISPONIBLE--------------
@@ -30,17 +30,42 @@ public class ReservaController {
         vehiculoDisponibleEnFechas.setPlaca("PLC-324");
         vehiculoDisponibleEnFechas.setModelo("Picksy");
         vehiculoDisponibleEnFechas.setMarca("Toyota");
+        vehiculoDisponibleEnFechas.setModelo("Prius");
         vehiculoDisponibleEnFechas.setAvaluo("23000 USD");
+        vehiculoDisponibleEnFechas.setCilindraje("200 cc");
+        vehiculoDisponibleEnFechas.setEstado("Disponible");
+        vehiculoDisponibleEnFechas.setPaisFabricacion("Japón");
+        vehiculoDisponibleEnFechas.setAnioFabricacion("2019");
+        vehiculoDisponibleEnFechas.setValorDia(new BigDecimal(40));
+
+        vehiculoDisponibleEnFechas.setUrlImagen("https://imgs.search.brave.com/ReZTJLSxCtmkSBoDHzE5Iz52An9yMD9dlhg3hDhhudg/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNDU5/NDQ1ODUxL3Bob3Rv/L3RveW90YS1wcml1/cy5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9OGRDdF9lSGxP/YzhMcUxEQllYME42/N0FpZFNNd2lRT0ZT/LVhzMUxYcnBjQT0");
+
+        //Imagen por defecto
+        if (vehiculoDisponibleEnFechas.getUrlImagen() == null) {
+            vehiculoDisponibleEnFechas.setUrlImagen("https://th.bing.com/th/id/OIG2.rKHSGXziRWnPAtOzQu86?w=1024&h=1024&rs=1&pid=ImgDetMain");
+        }
         /// ...mas atributos
         //----------------------------------------
 
 
         if (vehiculoDisponibleEnFechas == null) {
-            model.addAttribute("mensaje", "El vehículo no está disponible en las fechas seleccionadas");
-            return "vistaVehiculoNoDisponible";
+            String fechaDondeEstaraDisponible = "01/01/test"; //TODO Falra funcionalidad para esto en service
+            model.addAttribute("fechaDondeEstaraDisponible", fechaDondeEstaraDisponible);
+            return "reservas/vistaVehiculoNoDisponible";
         }
         model.addAttribute("vehiculoDisponible", vehiculoDisponibleEnFechas);
-        return "vistaPagarReserva";
+        model.addAttribute("reservaClienteTO", reservaClienteTO);
+        return "reservas/vistaPagarReserva";
     }
+
+    @PostMapping("/pagar")
+    public String reservar(Model model, ReservaClienteTO reservaClienteTO) {
+        // TODO logica para registrar reserva,
+        // String codigoReserva = this.reservar(LocalDate inicio, LocalDate fin, String placa, String cedula, String tarjeta);
+        String codigoReserva = "R-test";
+        model.addAttribute("codigoReserva", codigoReserva);
+        return "reservas/vistaPagoExitoso";
+    }
+
 
 }

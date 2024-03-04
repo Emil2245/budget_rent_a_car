@@ -15,17 +15,19 @@
 <header>
     <div class="logo-contenedor">
         <img class="logo"
-             src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png" alt="">
+             src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png"
+             alt="logo-budget">
     </div>
-    <button class="btn btn-warning fw-bold" onclick="window.location.href='/budget/clientes/nuevoCliente'">
-        Registrarse
-    </button>
 </header>
 
-<main class="contenedor-mediano">
-    <main class="contenedor-mediano bg-light">
-        <h1 th:text="${mensaje}" class="text-center fw-bold">Vehiculo no disponible</h1>
-        <div class="text-center p-5">
+<main class="contenedor-mediano mt-0">
+    <main class="contenedor-mediano bg-light mt-0">
+        <h1 class="text-center fw-bold">El vehículo no está disponible en las fechas seleccionadas</h1>
+        <div class="text-center p-4">
+            <span><strong>El vehículo estará disponible el: </strong></span>
+            <span th:text="${fechaDondeEstaraDisponible}"></span>
+        </div>
+        <div class="text-center p-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-car-off" width="250"
                  viewBox="0 0 24 24"
                  stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -36,14 +38,15 @@
             </svg>
         </div>
 
-        <div class="text-center p-5">
-            <button class="text-center btn btn-secondary btn-lg fw-bold"
-                    onclick="window.location.href='/budget/clientes/inicioClientes'">
-                Volver
-            </button>
+        <div class="text-center p-4">
+            <button type="button" class="btn btn-lg btn-secondary" onclick="goBack()">Volver</button>
         </div>
     </main>
 </main>
-
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>
