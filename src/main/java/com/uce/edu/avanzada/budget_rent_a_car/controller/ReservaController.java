@@ -1,18 +1,11 @@
 package com.uce.edu.avanzada.budget_rent_a_car.controller;
 
-import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import com.uce.edu.avanzada.budget_rent_a_car.service.to.ReservaClienteTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/budget/reservas")

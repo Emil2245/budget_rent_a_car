@@ -6,7 +6,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Reportes Reserva</title>
+    <title>Reportes Avaluo</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
@@ -14,7 +14,7 @@
 
 <body style="background-image: url(https://images6.alphacoders.com/390/390232.jpg);
 background-repeat: no-repeat; background-size: cover;">
-    <h1 class="text-center" style="color: white; background-color: rgba(0, 0, 0, 0.5); padding: 10px;">Reporte de las Reservas</h1>
+    <h1 class="text-center" style="color: white; background-color: rgba(0, 0, 0, 0.5); padding: 10px;">Reporte de Avaluo de Vehiculos</h1>
     <table class="table table-success table-striped">
         <thead>
             <tr>
@@ -24,7 +24,7 @@ background-repeat: no-repeat; background-size: cover;">
             </tr>
         </thead>
         <tbody>
-            <tr th:each="vehiculo:${reservas}">
+            <tr th:each="vehiculo:${vehiculos}">      
                 <td th:text="${vehiculo.placa}"></td>
                 <td th:text="${vehiculo.modelo}"></td>
                 <td th:text="${vehiculo.avaluo}"></td>
@@ -34,7 +34,7 @@ background-repeat: no-repeat; background-size: cover;">
     </table>
     <div class="d-grid gap-2 col-6 mx-auto">
 	
-	<a th:href="@{/empleados/inicio?}">
+	<a th:href="@{/vehiculos/avaluo}">
 		<input class="btn btn-dark" type="submit"  value="Regresar al Inicio">
 	</a>
     

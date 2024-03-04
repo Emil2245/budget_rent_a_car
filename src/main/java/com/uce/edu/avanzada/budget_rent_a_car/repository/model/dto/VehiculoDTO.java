@@ -15,14 +15,12 @@ public class VehiculoDTO {
 	}
 
 	public VehiculoDTO(String placa, String modelo, String marca, String anio, String estado, BigDecimal valor) {
-		super();
 		this.placa = placa;
 		this.modelo = modelo;
 		this.marca = marca;
 		this.anio = anio;
 		this.estado = estado;
 		this.valor = valor;
-
 	}
 
 	// To String
