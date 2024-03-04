@@ -1,8 +1,8 @@
 package com.uce.edu.avanzada.budget_rent_a_car.service;
 
-import com.example.demo.repository.IVehiculoRepository;
-import com.example.demo.repository.modelo.Reserva;
-import com.example.demo.repository.modelo.Vehiculo;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IVehiculoRepository;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,42 +19,42 @@ import java.util.stream.Collectors;
 public class VehiculoServiceImpl implements IVehiculoService {
 
 	@Autowired
-	private IVehiculoRepository vehiculoRepository;
+	private IVehiculoRepository iVehiculoRepository;
 
 	@Override
 	@Transactional(value = TxType.REQUIRED)
 	public void guardar(Vehiculo vehiculo) {
-		this.vehiculoRepository.insertar(vehiculo);
+		this.iVehiculoRepository.insertar(vehiculo);
 	}
 
-	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
-	public Vehiculo encontrar(Integer id) {
-		return this.vehiculoRepository.buscar(id);
-	}
-
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void actualizar(Vehiculo vehiculo) {
-		this.vehiculoRepository.actualizar(vehiculo);
-	}
-
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void borrar(Integer id) {
-		this.vehiculoRepository.eliminar(id);
-	}
+//	@Override
+//	@Transactional(value = TxType.NOT_SUPPORTED)
+//	public Vehiculo encontrar(Integer id) {
+//		return this.iVehiculoRepository.buscar(id);
+//	}
+//
+//	@Override
+//	@Transactional(value = TxType.REQUIRED)
+//	public void actualizar(Vehiculo vehiculo) {
+//		this.iVehiculoRepository.actualizar(vehiculo);
+//	}
+//
+//	@Override
+//	@Transactional(value = TxType.REQUIRED)
+//	public void borrar(Integer id) {
+//		this.iVehiculoRepository.eliminar(id);
+//	}
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public Vehiculo buscarPlaca(String placa) {
-		return this.vehiculoRepository.buscarPlaca(placa);
+		return this.iVehiculoRepository.buscarPlaca(placa);
 	}
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Vehiculo> vehiculosVIP(LocalDate fecha) {
-		List<Vehiculo> vehiculos = this.vehiculoRepository.reporteVehiculo(fecha);
+		List<Vehiculo> vehiculos = this.iVehiculoRepository.reporteVehiculo(fecha);
 		List<Vehiculo> vehiculosVIP = vehiculos.stream()
 				.sorted(Comparator.comparingDouble(
 						a -> a.getReservas().stream().map(b -> b.getTotal().doubleValue()).reduce(0.0, Double::sum)))
@@ -70,7 +70,7 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Vehiculo> buscarTodosDisponibles() {
-		return this.vehiculoRepository.buscarTodosDisponibles();
+		return this.iVehiculoRepository.buscarTodosDisponibles();
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Vehiculo> buscarVehiculosDisponibles(String marca, String modelo) {
-		return this.vehiculoRepository.buscar(marca, modelo);
+		return this.iVehiculoRepository.buscar(marca, modelo);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Vehiculo> reporteAvaluo(String avaluo) {
-		return this.vehiculoRepository.buscarAvaluo(avaluo);
+		return this.iVehiculoRepository.buscarAvaluo(avaluo);
 	}
 
 }

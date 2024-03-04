@@ -24,7 +24,7 @@ public class Cliente {
 	@Column(name = "clte_cedula")
 	private String cedula;
 	
-	@Column(name = "clte_fechaNacimiento")
+	@Column(name = "clte_fecha_nacimiento")
 	private LocalDate fechaNacimiento;
 	
 	@Column(name = "clte_genero")

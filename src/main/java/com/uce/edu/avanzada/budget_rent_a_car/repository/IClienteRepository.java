@@ -6,10 +6,10 @@ import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 
 public interface IClienteRepository {
 	
-	public void insertar(Cliente cliente);	
+	void insertar(Cliente cliente);
 	
-	public Cliente seleccionarPorCedula(String cedula);
+	Cliente seleccionarPorCedula(String cedula);
 	
-	public List<Cliente> seleccionarTodos();
+	List<Cliente> seleccionarTodos();
 
 }

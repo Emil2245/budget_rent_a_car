@@ -1,13 +1,13 @@
 package com.uce.edu.avanzada.budget_rent_a_car.service;
 
-import com.example.demo.repository.IClienteRepository;
-import com.example.demo.repository.IFacturaRepository;
-import com.example.demo.repository.IReservaRepository;
-import com.example.demo.repository.IVehiculoRepository;
-import com.example.demo.repository.modelo.Cliente;
-import com.example.demo.repository.modelo.Factura;
-import com.example.demo.repository.modelo.Reserva;
-import com.example.demo.repository.modelo.Vehiculo;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IClienteRepository;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IFacturaRepository;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IReservaRepository;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IVehiculoRepository;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Factura;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,18 +48,17 @@ public class ReservaServiceImpl implements IReservaService {
 		this.iReservaRepository.actualizar(reserva);
 	}
 
-	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
-	public Reserva buscar(Integer id) {
-		// TODO Auto-generated method stub
-		return this.iReservaRepository.seleccionar(id);
-	}
+//	@Override
+//	@Transactional(value = TxType.NOT_SUPPORTED)
+//	public Reserva buscar(Integer id) {
+//		return this.iReservaRepository.seleccionar(id);
+//	}
 
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void borrar(Integer id) {
-		this.iReservaRepository.eliminar(id);
-	}
+//	@Override
+//	@Transactional(value = TxType.REQUIRED)
+//	public void borrar(Integer id) {
+//		this.iReservaRepository.eliminar(id);
+//	}
 
 	@Override
 	@Transactional(value = TxType.REQUIRED)
@@ -97,7 +96,7 @@ public class ReservaServiceImpl implements IReservaService {
 	@Transactional(value = TxType.REQUIRED)
 	public String reservar(LocalDate inicio, LocalDate fin, String placa, String cedula, String tarjeta) {
 		Vehiculo vehiculo = this.iVehiculoRepository.buscarPlaca(placa);
-		Cliente cliente = this.iClienteRepository.buscarPorCedula(cedula);
+		Cliente cliente = this.iClienteRepository.seleccionarPorCedula(cedula);
 
 		Reserva reserva = new Reserva();
 		reserva.setCliente(cliente);
@@ -124,25 +123,23 @@ public class ReservaServiceImpl implements IReservaService {
 		return reserva.getCodigo();
 	}
 
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void aplicar(String codigo) {
-		// TODO Auto-generated method stub
-		Reserva reserva = this.iReservaRepository.buscarCodigo(codigo);
-		reserva.setEstado("E");
-
-		Vehiculo vehiculo = reserva.getVehiculo();
-		vehiculo.setEstado("Indisponible");
-
-		this.iVehiculoRepository.actualizar(vehiculo);
-		this.iReservaRepository.actualizar(reserva);
-
-	}
+//	@Override
+//	@Transactional(value = TxType.REQUIRED)
+//	public void aplicar(String codigo) {
+//		Reserva reserva = this.iReservaRepository.buscarCodigo(codigo);
+//		reserva.setEstado("E");
+//
+//		Vehiculo vehiculo = reserva.getVehiculo();
+//		vehiculo.setEstado("Indisponible");
+//
+//		this.iVehiculoRepository.actualizar(vehiculo);
+//		this.iReservaRepository.actualizar(reserva);
+//
+//	}
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public String getReserva(String codigo) {
-		// TODO Auto-generated method stub
 		Reserva reserva = this.iReservaRepository.buscarCodigo(codigo);
 
 		return String.format("Placa: %s - Modelo: %s – Estado: %s – Fecha: %s-%s – Reservado por: %s",
@@ -151,11 +148,11 @@ public class ReservaServiceImpl implements IReservaService {
 				reserva.getFechaFin(), reserva.getCliente().getCedula());
 	}
 
-		@Override
-		@Transactional(value = TxType.NOT_SUPPORTED)
-		public List<Reserva> buscarClientesVip() {
-			return this.iReservaRepository.buscarClientesVip();
-		}
+//		@Override
+//		@Transactional(value = TxType.NOT_SUPPORTED)
+//		public List<Reserva> buscarClientesVip() {
+//			return this.iReservaRepository.buscarClientesVip();
+//		}
 
 		
 

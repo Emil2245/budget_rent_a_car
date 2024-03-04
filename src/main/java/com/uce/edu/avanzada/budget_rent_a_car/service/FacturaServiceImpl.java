@@ -1,7 +1,7 @@
 package com.uce.edu.avanzada.budget_rent_a_car.service;
 
-import com.example.demo.repository.IFacturaRepository;
-import com.example.demo.repository.modelo.Factura;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IFacturaRepository;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Factura;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +18,25 @@ public class FacturaServiceImpl implements IFacturaService{
 		
 	}
 
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void actualizar(Factura factura) {
-		this.facturaRepository.actualizar(factura);
-		
-	}
+//	@Override
+//	@Transactional(value = TxType.REQUIRED)
+//	public void actualizar(Factura factura) {
+//		this.facturaRepository.actualizar(factura);
+//
+//	}
 
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void borrar(Integer id) {
-		this.facturaRepository.eliminar(id);
-		
-	}
+//	@Override
+//	@Transactional(value = TxType.REQUIRED)
+//	public void borrar(Integer id) {
+//		this.facturaRepository.eliminar(id);
+//
+//	}
 
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public Factura buscar(Integer id) {
-		
-		return this.facturaRepository.seleccionar(id);
-	}
+//	@Override
+//	@Transactional(value = TxType.REQUIRED)
+//	public Factura buscar(Integer id) {
+//
+//		return this.facturaRepository.seleccionar(id);
+//	}
 
 }

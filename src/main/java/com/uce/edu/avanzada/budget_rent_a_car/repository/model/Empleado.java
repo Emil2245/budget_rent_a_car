@@ -23,7 +23,7 @@ public class Empleado {
 	@Column(name = "empl_cedula")
 	private String cedula;
 	
-	@Column(name = "empl_fechaNacimiento")
+	@Column(name = "empl_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
 	
 	@Column(name = "empl_genero")
