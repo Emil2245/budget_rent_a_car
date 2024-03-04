@@ -33,7 +33,7 @@ public class ClienteController {
             model.addAttribute("vehiculos", vehiculosFiltrados);
         }
 
-        return "vistaClientes";
+        return "clientes/vistaClientes";
     }
 
     public List<Vehiculo> getVehiculosMock() {
@@ -67,7 +67,7 @@ public class ClienteController {
         Cliente cliente = new Cliente();
         cliente.setRegistro("c"); // c -> cliente
         model.addAttribute("cliente", cliente);
-        return "vistaNuevoCliente";
+        return "clientes/vistaNuevoCliente";
     }
 
     @GetMapping("/nuevoClienteDesdeEmpleado")
@@ -75,7 +75,7 @@ public class ClienteController {
         Cliente cliente = new Cliente();
         cliente.setRegistro("e"); // e -> empleado
         model.addAttribute("cliente", cliente);
-        return "vistaNuevoCliente";
+        return "clientes/vistaNuevoCliente";
     }
 
     @PostMapping("/registrar")
