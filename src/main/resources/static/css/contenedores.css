@@ -1,23 +1,21 @@
+/* 3XL */
 .contenedor-mediano {
-  max-width: 600px;
+  max-width: 768px;
   margin: 2em auto;
   border-radius: 10px;
   padding: 1.5em;
-  background-color: whitesmoke;
 }
-
+/*4XL*/
 .contenedor-grande {
-  max-width: 800px;
+  max-width: 896px;
   margin: 2em auto;
   border-radius: 10px;
   padding: 1.5em;
-  background-color: whitesmoke;
 }
-
+/* 5XL */
 .contenedor-extra-grande {
-  max-width: 1000px;
+  max-width: 1024px;
   margin: 2em auto;
   border-radius: 10px;
   padding: 1.5em;
-  background-color: whitesmoke;
 }
