@@ -8,139 +8,158 @@ import java.util.List;
 @Entity
 @Table(name = "vehiculo") //mau
 public class Vehiculo {
-	
-	@Id
-	@SequenceGenerator(name = "seq_vehiculo",sequenceName = "seq_vehiculo",allocationSize = 1)
-	@GeneratedValue(generator = "seq_vehiculo",strategy = GenerationType.SEQUENCE)
-	@Column(name = "vehi_id")
-	private Integer id;
-	
-	@Column(name = "vehi_placa")
-	private String placa;
-	
-	@Column(name = "vehi_modelo")
-	private String modelo;
-	
-	@Column(name = "vehi_marca")
-	private String marca;
-	
-	@Column(name = "vehi_estado")
-	private String estado;
-	
-	@Column(name = "vehi_anio_fabricacion")
-	private String anioFabricacion;	
-	
-	@Column(name = "vehi_cilindraje")
-	private String cilindraje;
-	
-	@Column(name = "vehi_pais_fabricacion")
-	private String paisFabricacion;
-	
-	@Column(name = "vehi_avaluo")
-	private String avaluo;
 
-	@Column(name = "vehi_valor_dia")
-	private BigDecimal valorDia;
-	
-	@OneToMany(mappedBy = "vehiculo",cascade = CascadeType.ALL)
-	private List<Reserva> reservas;	
+    @Id
+    @SequenceGenerator(name = "seq_vehiculo", sequenceName = "seq_vehiculo", allocationSize = 1)
+    @GeneratedValue(generator = "seq_vehiculo", strategy = GenerationType.SEQUENCE)
+    @Column(name = "vehi_id")
+    private Integer id;
 
-	public List<Reserva> getReservas() {
-		return reservas;
-	}
+    @Column(name = "vehi_placa")
+    private String placa;
 
-	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
-	}
+    @Column(name = "vehi_modelo")
+    private String modelo;
 
-	@Override
-	public String toString() {
-		return "Vehiculo [id=" + id + ", placa=" + placa + ", modelo=" + modelo + ", marca=" + marca + ", estado="
-				+ estado + ", anioFabricacion=" + anioFabricacion + ", cilindraje=" + cilindraje + ", paisFabricacion="
-				+ paisFabricacion + ", avaluo=" + avaluo + ", valorDia=" + valorDia + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
+    @Column(name = "vehi_marca")
+    private String marca;
 
-	public Integer getId() {
-		return id;
-	}
+    @Column(name = "vehi_estado")
+    private String estado;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "vehi_anio_fabricacion")
+    private String anioFabricacion;
 
-	public String getPlaca() {
-		return placa;
-	}
+    @Column(name = "vehi_cilindraje")
+    private String cilindraje;
 
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
+    @Column(name = "vehi_pais_fabricacion")
+    private String paisFabricacion;
 
-	public String getModelo() {
-		return modelo;
-	}
+    @Column(name = "vehi_avaluo")
+    private String avaluo;
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+    @Column(name = "vehi_valor_dia")
+    private BigDecimal valorDia;
 
-	public String getMarca() {
-		return marca;
-	}
+    @Column(name = "vehi_url_imagen")
+    private String urlImagen;
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+    private List<Reserva> reservas;
 
-	public String getEstado() {
-		return estado;
-	}
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
 
-	public String getAnioFabricacion() {
-		return anioFabricacion;
-	}
 
-	public void setAnioFabricacion(String anioFabricacion) {
-		this.anioFabricacion = anioFabricacion;
-	}
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "id=" + id +
+                ", placa='" + placa + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", marca='" + marca + '\'' +
+                ", estado='" + estado + '\'' +
+                ", anioFabricacion='" + anioFabricacion + '\'' +
+                ", cilindraje='" + cilindraje + '\'' +
+                ", paisFabricacion='" + paisFabricacion + '\'' +
+                ", avaluo='" + avaluo + '\'' +
+                ", valorDia=" + valorDia +
+                ", urlImagen='" + urlImagen + '\'' +
+                ", reservas=" + reservas +
+                '}';
+    }
 
-	public String getCilindraje() {
-		return cilindraje;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setCilindraje(String cilindraje) {
-		this.cilindraje = cilindraje;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getPaisFabricacion() {
-		return paisFabricacion;
-	}
+    public String getPlaca() {
+        return placa;
+    }
 
-	public void setPaisFabricacion(String paisFabricacion) {
-		this.paisFabricacion = paisFabricacion;
-	}
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
 
-	public String getAvaluo() {
-		return avaluo;
-	}
+    public String getModelo() {
+        return modelo;
+    }
 
-	public void setAvaluo(String avaluo) {
-		this.avaluo = avaluo;
-	}
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 
-	public BigDecimal getValorDia() {
-		return valorDia;
-	}
+    public String getMarca() {
+        return marca;
+    }
 
-	public void setValorDia(BigDecimal valorDia) {
-		this.valorDia = valorDia;
-	}
-	
-	
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getAnioFabricacion() {
+        return anioFabricacion;
+    }
+
+    public void setAnioFabricacion(String anioFabricacion) {
+        this.anioFabricacion = anioFabricacion;
+    }
+
+    public String getCilindraje() {
+        return cilindraje;
+    }
+
+    public void setCilindraje(String cilindraje) {
+        this.cilindraje = cilindraje;
+    }
+
+    public String getPaisFabricacion() {
+        return paisFabricacion;
+    }
+
+    public void setPaisFabricacion(String paisFabricacion) {
+        this.paisFabricacion = paisFabricacion;
+    }
+
+    public String getAvaluo() {
+        return avaluo;
+    }
+
+    public void setAvaluo(String avaluo) {
+        this.avaluo = avaluo;
+    }
+
+    public BigDecimal getValorDia() {
+        return valorDia;
+    }
+
+    public void setValorDia(BigDecimal valorDia) {
+        this.valorDia = valorDia;
+    }
+
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
 }
