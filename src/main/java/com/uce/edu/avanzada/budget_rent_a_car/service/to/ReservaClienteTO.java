@@ -1,5 +1,6 @@
 package com.uce.edu.avanzada.budget_rent_a_car.service.to;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ReservaClienteTO {
@@ -9,6 +10,9 @@ public class ReservaClienteTO {
     private String modeloVehiculo;
     private LocalDate fechaInicioReserva;
     private LocalDate fechaFinReserva;
+    private String numTargetaReserva;
+    private BigDecimal totalReserva;
+    private String codigoReserva;
 
     // GET Y SET
     public String getCedulaCliente() {
@@ -59,6 +63,30 @@ public class ReservaClienteTO {
         this.fechaFinReserva = fechaFinReserva;
     }
 
+    public String getNumTargetaReserva() {
+        return numTargetaReserva;
+    }
+
+    public void setNumTargetaReserva(String numTargetaReserva) {
+        this.numTargetaReserva = numTargetaReserva;
+    }
+
+    public BigDecimal getTotalReserva() {
+        return totalReserva;
+    }
+
+    public void setTotalReserva(BigDecimal totalReserva) {
+        this.totalReserva = totalReserva;
+    }
+
+    public String getCodigoReserva() {
+        return codigoReserva;
+    }
+
+    public void setCodigoReserva(String codigoReserva) {
+        this.codigoReserva = codigoReserva;
+    }
+
     @Override
     public String toString() {
         return "ReservaClienteTO{" +
@@ -68,6 +96,8 @@ public class ReservaClienteTO {
                 ", modeloVehiculo='" + modeloVehiculo + '\'' +
                 ", fechaInicioReserva=" + fechaInicioReserva +
                 ", fechaFinReserva=" + fechaFinReserva +
+                ", numTargetaReserva='" + numTargetaReserva + '\'' +
+                ", totalReserva=" + totalReserva +
                 '}';
     }
 }
