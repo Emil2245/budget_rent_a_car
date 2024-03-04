@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/budget/clientes")
+@RequestMapping("/clientes")
 public class ClienteController {
 
     // http://localhost:8080/rentaCar/budget/clientes/inicioClientes
@@ -81,13 +81,13 @@ public class ClienteController {
     @PostMapping("/registrar")
     public String registrar(Cliente cliente) {
         // TODO guardar cliente
-        return "redirect:/budget/clientes/inicioClientes";
+        return "redirect:/clientes/inicioClientes";
     }
 
     @PostMapping("/buscarVehículos")
     public String buscarVehiculos(Cliente cliente) {
         // TODO guardar cliente
-        return "redirect:/budget/clientes/inicioClientes";
+        return "redirect:/clientes/inicioClientes";
     }
 
 

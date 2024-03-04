@@ -38,10 +38,10 @@ public class EmpleadoController {
     @Autowired
     private IEmpleadoService iEmpleadoService;
 
-    // http://localhost:8080/rentaCar/empleados/inicio
+    // http://localhost:8085/empleados/inicio
     @GetMapping("/inicio")
     public String inicioEmpleados() {
-        LOG.info("Dirigiendo a vista Principal de empleado");
+        
         return "vistaPrincipalEmpleados";
     }
 
@@ -55,14 +55,14 @@ public class EmpleadoController {
     public String buscarEstudiantes(Model modelo) {
         List<Cliente> listaClientes = this.iClienteService.verClientes();
         modelo.addAttribute("clientes", listaClientes);
-        LOG.info("Buscando cliente");
+       
         return "vistaListaClientesEmpleado";
     }
 
     @PostMapping("/guardar")
     public String registrar(Cliente cliente) {
         this.iClienteService.crear(cliente);
-        LOG.info("Guardando cliente");
+       
         return "redirect:/empleados/lista_clientes";
     }
 
@@ -96,7 +96,7 @@ public class EmpleadoController {
     @PostMapping("/guardarVehiculo")
     public String registrarVehiculo(Vehiculo vehiculo) {
         this.iVehiculoService.guardar(vehiculo);
-        LOG.info("Registrando vehículo");
+       
         return "redirect:/empleados/lista_vehiculos";
     }
 
@@ -104,7 +104,7 @@ public class EmpleadoController {
     public String listaVehiculos(Model modelo) {
         List<Vehiculo> listaVehiculos = this.iVehiculoService.buscarTodosDisponibles();
         modelo.addAttribute("vehiculos", listaVehiculos);
-        LOG.info("Reporte vehículos");
+       
         return "vistaListaVehiculos";
     }
 
@@ -115,7 +115,7 @@ public class EmpleadoController {
         List<Vehiculo> lista = new ArrayList<>();
         lista.add(this.iVehiculoService.buscarPlaca(vehiculo.getPlaca()));
         modelo.addAttribute("lista", lista);
-        LOG.info("Buscando Placa");
+        
         return "vistaVehiculosPlaca";
     }
 
@@ -152,7 +152,7 @@ public class EmpleadoController {
                     .get(2);
             model.addAttribute("total", total);
             session.setAttribute("reserva", reservaDTO);
-            LOG.info("Reserva confirmada");
+           
             return "vistaConfirmacionReserva";
         }
 
