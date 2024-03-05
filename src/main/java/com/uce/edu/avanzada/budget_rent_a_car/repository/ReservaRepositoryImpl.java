@@ -48,7 +48,9 @@ public class ReservaRepositoryImpl implements IReservaRepository {
     public List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin) {
 
         return this.entityManager
-                .createQuery("SELECT r FROM Reserva r JOIN r.vehiculo v WHERE r.fechaInicio " + "BETWEEN :datoFechaInicio AND :datoFechaFinal AND r.fechaFin " + "BETWEEN :datoFechaInicio AND :datoFechaFinal", Reserva.class)
+                .createQuery("SELECT r FROM Reserva r JOIN r.vehiculo v WHERE r.fechaInicio "
+                        + "BETWEEN :datoFechaInicio AND :datoFechaFinal AND r.fechaFin "
+                        + "BETWEEN :datoFechaInicio AND :datoFechaFinal", Reserva.class)
                 .setParameter("datoFechaInicio", inicio.minusDays(1))
                 .setParameter("datoFechaFinal", fin.plusDays(1))
                 .getResultList();

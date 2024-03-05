@@ -66,7 +66,18 @@ public class ReservaServiceImpl implements IReservaService {
         Vehiculo v = this.iVehiculoRepository.buscarPlaca(placa);
         List<Reserva> reservas = this.iReservaRepository.reporteReserva(inicio, fin);
 
-        return reservas.parallelStream().anyMatch(x -> x.getVehiculo().getId() == v.getId());
+        return reservas.parallelStream().anyMatch(x -> x.getVehiculo().getId().equals(v.getId()));
+    }
+
+    @Override
+    @Transactional(value = TxType.REQUIRED)
+    public List<String> calcularIntervaloDias(LocalDate inicio, LocalDate fin, String placa) {
+        Vehiculo v = this.iVehiculoRepository.buscarPlaca(placa);
+        List<Reserva> reservas = this.iReservaRepository.reporteReserva(inicio, fin);
+        return reservas.parallelStream()
+                .filter(reserva -> reserva.getVehiculo().getId().equals(v.getId()))
+                .map(reserva ->  "\nDesde: "+reserva.getFechaInicio()+" / Hasta: "+ reserva.getFechaFin()+ "\n")
+                .toList();
     }
 
     @Override
@@ -146,12 +157,5 @@ public class ReservaServiceImpl implements IReservaService {
                 reserva.getVehiculo().getEstado().equals("D") ? "Disponible" : "Indisponible", reserva.getFechaInicio(),
                 reserva.getFechaFin(), reserva.getCliente().getCedula());
     }
-
-    @Override
-    @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Reserva> buscarClientesVip() {
-        return this.iReservaRepository.buscarClientesVip();
-    }
-
 
 }

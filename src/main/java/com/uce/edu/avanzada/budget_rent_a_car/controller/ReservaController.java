@@ -40,10 +40,14 @@ public class ReservaController {
         boolean estaVehiculoDisponible = !this.iReservaService.verificar(fechaInicio, fechaFin, placa);
 
         if (!estaVehiculoDisponible) {
-            String fechaDondeEstaraDisponible = "01/01/falta"; //TODO Falta funcionalidad para esto en service
-            // List<LocalDate> cuandoEstaraDisponible(placa)
+            //TODO Falta funcionalidad para esto en service
+            StringBuilder fechasDondeEstaOcupado = new StringBuilder();
+            List<String>intervalos=this.iReservaService.calcularIntervaloDias(fechaInicio, fechaFin, placa);
+            for(String intervalo: intervalos){
+                fechasDondeEstaOcupado.append(intervalo);
+            }
 
-            model.addAttribute("fechaDondeEstaraDisponible", fechaDondeEstaraDisponible);
+            model.addAttribute("fechasDondeEstaOcupado", fechasDondeEstaOcupado);
             return "reservas/vistaVehiculoNoDisponible";
         }
 

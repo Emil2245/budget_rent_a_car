@@ -24,8 +24,9 @@
     <main class="contenedor-mediano bg-light mt-0">
         <h1 class="text-center fw-bold">El vehículo no está disponible en las fechas seleccionadas</h1>
         <div class="text-center p-4">
-            <span><strong>El vehículo estará disponible el: </strong></span>
-            <span th:text="${fechaDondeEstaraDisponible}"></span>
+            <span><strong>El vehículo está reservado estas fechas: </strong></span>
+            <br>
+	        <span th:text="${fechasDondeEstaOcupado}"></span>
         </div>
         <div class="text-center p-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-car-off" width="250"

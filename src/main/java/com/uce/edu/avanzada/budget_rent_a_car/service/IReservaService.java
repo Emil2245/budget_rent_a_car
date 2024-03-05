@@ -17,6 +17,7 @@ public interface IReservaService {
 	void borrar(Integer id);
 
 	Boolean verificar(LocalDate inicio, LocalDate FIN, String placa);
+	List<String> calcularIntervaloDias(LocalDate inicio, LocalDate FIN, String placa);
 
 	List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin);
 
@@ -27,9 +28,6 @@ public interface IReservaService {
 	void aplicar(String reserva);
 
 	String getReserva(String codigo);
-	
-	List<Reserva> buscarClientesVip();
-	
 	
 
 }
