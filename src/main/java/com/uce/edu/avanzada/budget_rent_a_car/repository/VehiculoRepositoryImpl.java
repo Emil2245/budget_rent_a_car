@@ -85,8 +85,14 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Vehiculo> buscarTodosDisponibles() {
+    public List<Vehiculo> buscarTodos() {
         return this.entityManager.createQuery("SELECT v FROM Vehiculo v", Vehiculo.class)
+                .getResultList();
+    }
+
+    @Override
+    public List<Vehiculo> buscarTodosSoloDisponibles() {
+        return this.entityManager.createQuery("SELECT v FROM Vehiculo v WHERE v.estado != 'Indisponible'", Vehiculo.class)
                 .getResultList();
     }
 

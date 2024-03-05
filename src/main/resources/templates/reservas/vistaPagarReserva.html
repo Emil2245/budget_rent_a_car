@@ -46,7 +46,7 @@
                 </div>
                 <div>
                     <label class="fw-bold">Año de fabricación:</label>
-                    <span th:text="${vehiculoDisponible.paisFabricacion}">2002</span>
+                    <span th:text="${vehiculoDisponible.anioFabricacion}">2002</span>
                 </div>
                 <div>
                     <label class="fw-bold">País de fabricación:</label>
@@ -93,10 +93,14 @@
             </div>
         </section>
     </main>
+
+    <!--    Inputs invisibles para que no se pierdan los atributos de reservaClienteTO-->
     <input type="text" th:field="${reservaClienteTO.cedulaCliente}" class="d-none">
     <input type="text" th:field="${reservaClienteTO.placaVehiculo}" class="d-none">
     <input type="text" th:field="${reservaClienteTO.fechaInicioReserva}" class="d-none">
     <input type="text" th:field="${reservaClienteTO.fechaFinReserva}" class="d-none">
+
+    <input type="text" th:field="${reservaClienteTO.auxSinReserva}" class="d-none">
 
 </form>
 

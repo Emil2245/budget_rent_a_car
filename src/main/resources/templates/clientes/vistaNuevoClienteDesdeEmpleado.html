@@ -19,15 +19,12 @@
              src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png"
              alt="logo-budget">
     </div>
-    <button class="btn btn-warning fw-bold">
-        Registrarse Desde Empleado
-    </button>
 </header>
 
 <main class="contenedor-mediano bg-light">
     <form th:action="@{/budget/clientes/registrarDesdeEmpleado}" th:object="${cliente}" th:method="POST">
 
-        <h3>Ingrese sus datos </h3>
+        <h3>Ingrese los datos del cliente</h3>
         <table class="table-contenedor">
             <tr>
                 <label class="form-label">Cédula:</label>
@@ -52,7 +49,7 @@
         </table>
 
         <div class="btn-contenedor">
-            <a th:href="@{/empleados/inicio}" class="btn btn-danger">Cancelar</a>
+            <a th:href="@{/budget/reservas/mostrarRetirarSinReserva}" class="btn btn-danger">Cancelar</a>
             <button class="btn btn-primary" type="submit" onclick="mostrarAlerta()">Registrarse</button>
         </div>
 
