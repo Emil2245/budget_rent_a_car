@@ -1,8 +1,12 @@
 package com.uce.edu.avanzada.budget_rent_a_car.controller;
 
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IClienteRepository;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
+import com.uce.edu.avanzada.budget_rent_a_car.service.IClienteService;
+import com.uce.edu.avanzada.budget_rent_a_car.service.IVehiculoService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.to.ReservaClienteTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,80 +18,64 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/clientes")
+@RequestMapping("/budget/clientes")
 public class ClienteController {
 
-    // http://localhost:8080/rentaCar/budget/clientes/inicioClientes
+    @Autowired
+    private IClienteService iClienteService;
+    @Autowired
+    private IVehiculoService iVehiculoService;
+
+
+    // http://localhost:8080/budget/clientes/inicioClientes
     @GetMapping("/inicioClientes")
     public String mostrarInicio(Model model, ReservaClienteTO reservaClienteTO) {
         model.addAttribute("reservaClienteTO", new ReservaClienteTO());
 
-        List<Vehiculo> vehiculosFiltrados = this.getVehiculosMock();
-
         String marca = reservaClienteTO.getMarcaVehiculo();
         String modelo = reservaClienteTO.getModeloVehiculo();
 
-        if (marca == null && modelo == null) {
-            model.addAttribute("vehiculos", Arrays.asList(new Vehiculo()));
-        } else {
+        try {
+            List<Vehiculo> vehiculosFiltrados = this.iVehiculoService.buscarVehiculosPorMarcaYModelo(marca, modelo);
             model.addAttribute("vehiculos", vehiculosFiltrados);
+        } catch (Exception e) {
+            model.addAttribute("vehiculos", Arrays.asList(new Vehiculo()));
         }
 
         return "clientes/vistaClientes";
     }
 
-    public List<Vehiculo> getVehiculosMock() {
-        Vehiculo v1 = new Vehiculo();
-        v1.setPlaca("PCB-2480");
-        v1.setModelo("Sedán");
-        v1.setMarca("Toyota");
-        v1.setEstado("Indisponible");
-        v1.setAnioFabricacion("2002");
-        v1.setCilindraje("2000 cc");
-        v1.setPaisFabricacion("Japón");
-        v1.setAvaluo("5000 USD");
-        v1.setValorDia(new BigDecimal("3.5"));
-        Vehiculo v2 = new Vehiculo();
-        v2.setPlaca("PCB-2480");
-        v2.setModelo("Hatchback");
-        v2.setMarca("Volkswagen");
-        v2.setEstado("Disponible");
-        v2.setAnioFabricacion("2021");
-        v2.setCilindraje("1500 cc");
-        v2.setPaisFabricacion("Alemania");
-        v2.setAvaluo("12000 USD");
-        v2.setValorDia(new BigDecimal("4.2"));
-
-
-        return Arrays.asList(v1, v2);
-    }
 
     @GetMapping("/nuevoCliente")
     public String registrarNuevo(Model model) {
         Cliente cliente = new Cliente();
-        cliente.setRegistro("c"); // c -> cliente
         model.addAttribute("cliente", cliente);
         return "clientes/vistaNuevoCliente";
     }
 
-    @GetMapping("/nuevoClienteDesdeEmpleado")
-    public String registrarNuevoDesdeEmpleado(Model model) {
-        Cliente cliente = new Cliente();
-        cliente.setRegistro("e"); // e -> empleado
-        model.addAttribute("cliente", cliente);
-        return "clientes/vistaNuevoCliente";
+
+    @PostMapping("/registrarDesdeCliente")
+    public String registrarDesdeCliente(Cliente cliente) {
+        cliente.setRegistro("C"); // C -> Cliente
+        this.iClienteService.crear(cliente);
+
+        return "redirect:/budget/clientes/inicioClientes";
     }
 
-    @PostMapping("/registrar")
-    public String registrar(Cliente cliente) {
-        // TODO guardar cliente
-        return "redirect:/clientes/inicioClientes";
+    //http://localhost:8085/budget/clientes/registrarDesdeEmpleado
+    @PostMapping("/registrarDesdeEmpleado")
+    public String registrarDesdeEmpleado(Cliente cliente) {
+        cliente.setRegistro("E"); // E -> Empleado
+        this.iClienteService.crear(cliente);
+
+        // TODO Cambiar redirect a una vista de empleado
+        return "redirect:/budget/clientes/inicioClientes";
     }
 
     @PostMapping("/buscarVehículos")
     public String buscarVehiculos(Cliente cliente) {
         // TODO guardar cliente
-        return "redirect:/clientes/inicioClientes";
+        return "redirect:/budget/clientes/inicioClientes";
     }
 
 
