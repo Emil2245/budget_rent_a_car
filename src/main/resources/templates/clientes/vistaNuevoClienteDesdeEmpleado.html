@@ -22,7 +22,7 @@
 </header>
 
 <main class="contenedor-mediano bg-light">
-    <form th:action="@{/budget/clientes/registrarDesdeEmpleado}" th:object="${cliente}" th:method="POST">
+    <form th:action="@{/clientes/registrarDesdeEmpleado}" th:object="${cliente}" th:method="POST">
 
         <h3>Ingrese los datos del cliente</h3>
         <table class="table-contenedor">
@@ -49,7 +49,7 @@
         </table>
 
         <div class="btn-contenedor">
-            <a th:href="@{/budget/reservas/mostrarRetirarSinReserva}" class="btn btn-danger">Cancelar</a>
+            <a th:href="@{/reservas/mostrarRetirarSinReserva}" class="btn btn-danger">Cancelar</a>
             <button class="btn btn-primary" type="submit" onclick="mostrarAlerta()">Registrarse</button>
         </div>
 

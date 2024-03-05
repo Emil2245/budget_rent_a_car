@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/budget/clientes")
+@RequestMapping("/clientes")
 public class ClienteController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ClienteController {
     @Autowired
     private IVehiculoService iVehiculoService;
 
-    // http://localhost:8080/budget/clientes/inicioClientes
+    // http://localhost:8080/clientes/inicioClientes
     @GetMapping("/inicioClientes")
     public String mostrarInicio(Model model, ReservaClienteTO reservaClienteTO) {
         model.addAttribute("reservaClienteTO", new ReservaClienteTO());
@@ -64,10 +64,10 @@ public class ClienteController {
         cliente.setRegistro("C"); // C -> Cliente
         this.iClienteService.crear(cliente);
 
-        return "redirect:/budget/clientes/inicioClientes";
+        return "redirect:/clientes/inicioClientes";
     }
 
-    //http://localhost:8085/budget/clientes/registrarDesdeEmpleado
+    //http://localhost:8085/clientes/registrarDesdeEmpleado
     @PostMapping("/registrarDesdeEmpleado")
     public String registrarDesdeEmpleado(Cliente cliente) {
         cliente.setRegistro("E"); // E -> Empleado
@@ -78,7 +78,7 @@ public class ClienteController {
 
     @PostMapping("/buscarVehículos")
     public String buscarVehiculos(Cliente cliente) {
-        return "redirect:/budget/clientes/inicioClientes";
+        return "redirect:/clientes/inicioClientes";
     }
 
 

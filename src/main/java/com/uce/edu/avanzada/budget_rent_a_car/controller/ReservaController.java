@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/budget/reservas")
+@RequestMapping("/reservas")
 public class ReservaController {
     @Autowired
     private IReservaService iReservaService;
@@ -36,14 +36,14 @@ public class ReservaController {
 //        boolean auxVengoDesdeSinReserva = reservaClienteTO.isAuxSinReserva();
 
         if (cedula.isEmpty() || placa.isEmpty() || fechaInicio == null || fechaFin == null)
-            return "redirect:/budget/clientes/inicioClientes";
+            return "redirect:/clientes/inicioClientes";
         boolean estaVehiculoDisponible = !this.iReservaService.verificar(fechaInicio, fechaFin, placa);
 
         if (!estaVehiculoDisponible) {
             //TODO Falta funcionalidad para esto en service
             StringBuilder fechasDondeEstaOcupado = new StringBuilder();
-            List<String>intervalos=this.iReservaService.calcularIntervaloDias(fechaInicio, fechaFin, placa);
-            for(String intervalo: intervalos){
+            List<String> intervalos = this.iReservaService.calcularIntervaloDias(fechaInicio, fechaFin, placa);
+            for (String intervalo : intervalos) {
                 fechasDondeEstaOcupado.append(intervalo);
             }
 
@@ -83,7 +83,7 @@ public class ReservaController {
         model.addAttribute("codigoReserva", codigoReserva);
 
         if (auxVengoDesdeSinReserva)
-            return "redirect:/budget/reservas/retirarSinReserva/" + codigoReserva;
+            return "redirect:/reservas/retirarSinReserva/" + codigoReserva;
         return "reservas/vistaPagoExitoso";
     }
 

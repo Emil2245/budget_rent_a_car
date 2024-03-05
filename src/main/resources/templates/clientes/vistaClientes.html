@@ -21,13 +21,13 @@
              src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png"
              alt="logo-budget">
     </div>
-    <button class="btn btn-warning fw-bold" onclick="window.location.href='/budget/clientes/nuevoCliente'">
+    <button class="btn btn-warning fw-bold" onclick="window.location.href='/clientes/nuevoCliente'">
         Registrarse
     </button>
 </header>
 
 <h5 class="container mx-auto mt-4">Buscar vehículos</h5>
-<form th:action="@{/budget/clientes/inicioClientes}" th:object="${reservaClienteTO}" th:method="GET">
+<form th:action="@{/clientes/inicioClientes}" th:object="${reservaClienteTO}" th:method="GET">
 
     <main class="container mx-auto bg-light p-3 rounded-3 row">
         <section class="row col-10">
@@ -51,7 +51,7 @@
 </form>
 
 <h5 class="container mx-auto mt-2">Reservar vehículo</h5>
-<form th:action="@{/budget/reservas/verDisponibilidad}" th:object="${reservaClienteTO}" th:method="POST">
+<form th:action="@{/reservas/verDisponibilidad}" th:object="${reservaClienteTO}" th:method="POST">
     <main class="container mx-auto bg-light p-3 rounded-3 row">
 
         <section class="row col-10">
