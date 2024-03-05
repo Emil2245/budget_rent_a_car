@@ -11,26 +11,27 @@ import java.util.List;
 
 @Service
 
-public class ClienteServiceImpl implements IClienteService{
-	
-	@Autowired
-	private IClienteRepository iClienteRepository;
+public class ClienteServiceImpl implements IClienteService {
 
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public void crear(Cliente cliente) {
-		this.iClienteRepository.insertar(cliente);
-	}
-	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
-	public Cliente buscarPorCedula(String cedula) {
-		return this.iClienteRepository.seleccionarPorCedula(cedula);
-	}
+    @Autowired
+    private IClienteRepository iClienteRepository;
 
-	@Override
-	@Transactional(value=TxType.NOT_SUPPORTED)
-	public List<Cliente> verClientes() {
-		return this.iClienteRepository.seleccionarTodos();
-	}
+    @Override
+    @Transactional(value = TxType.REQUIRED)
+    public void crear(Cliente cliente) {
+        this.iClienteRepository.insertar(cliente);
+    }
+
+    @Override
+    @Transactional(value = TxType.NOT_SUPPORTED)
+    public Cliente buscarPorCedula(String cedula) {
+        return this.iClienteRepository.seleccionarPorCedula(cedula);
+    }
+
+    @Override
+    @Transactional(value = TxType.NOT_SUPPORTED)
+    public List<Cliente> verClientes() {
+        return this.iClienteRepository.seleccionarTodos();
+    }
 
 }
