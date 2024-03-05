@@ -25,8 +25,7 @@ public class ReporteController {
 	
 	@Autowired
 	private IReservaService iReservaService;
-	
-	//reporte Reservas
+
 	@GetMapping("/reservas")
 	public String reporteReservas(Reserva Reserva) {
 		return "vReporteReserva";

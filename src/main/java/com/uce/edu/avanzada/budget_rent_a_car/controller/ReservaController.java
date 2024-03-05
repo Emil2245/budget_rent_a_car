@@ -32,9 +32,6 @@ public class ReservaController {
 
         if (cedula.isEmpty() || placa.isEmpty() || fechaInicio == null || fechaFin == null)
             return "redirect:/budget/clientes/inicioClientes";
-
-
-        // TODO Pregunta que hace verificar
         boolean estaVehiculoDisponible = !this.iReservaService.verificar(fechaInicio, fechaFin, placa);
 
         if (!estaVehiculoDisponible) {
@@ -58,8 +55,6 @@ public class ReservaController {
 
     @PostMapping("/pagar")
     public String reservar(Model model, ReservaClienteTO reservaClienteTO) {
-        // TODO logica para registrar reserva,
-        // String codigoReserva = this.reservar(LocalDate inicio, LocalDate fin, String placa, String cedula, String tarjeta);
         LocalDate fechaInicio = reservaClienteTO.getFechaInicioReserva();
         LocalDate fechaFin = reservaClienteTO.getFechaFinReserva();
         String placa = reservaClienteTO.getPlacaVehiculo();
@@ -67,15 +62,12 @@ public class ReservaController {
         String numTargeta = reservaClienteTO.getNumTargetaReserva();
 
         if (numTargeta.isEmpty()) {
-            // TODO LOGICA SI EL INPUT DE TARJETA NO ES VALIDO
             return "";
         }
-
 
         String codigoReserva = this.iReservaService.reservar(fechaInicio, fechaFin, placa, cedula, numTargeta);
         model.addAttribute("codigoReserva", codigoReserva);
         return "reservas/vistaPagoExitoso";
     }
-
 
 }

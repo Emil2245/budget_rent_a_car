@@ -1,61 +1,65 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<!DOCTYPE html>
-	
-	<html lang="en">
-	
-	<head>
-		<meta charset="UTF-8">
-		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<title>Inicio-Empleados</title>
-		<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-		      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-		      rel="stylesheet">
-	
-	</head>
-	
-	<body style="background-image: url('https://s1.1zoom.me/big3/783/Chevrolet_Transformers_5_496628.jpg'); background-repeat: no-repeat;
- background-size:cover; background-attachment: fixed;">
+	<meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+		name="viewport">
+	<meta content="ie=edge" http-equiv="X-UA-Compatible">
+	<title>Register</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/header.css" type="text/css">
+	<link rel="stylesheet" href="/css/form.css" type="text/css">
+	<link rel="stylesheet" href="/css/contenedores.css" type="text/css">
+</head>
+
+<body style="background-image: url(https://a0.cdnfan.com/images/M/3/2/8/5/_hd_97072.jpg); background-repeat: no-repeat;
+  background-size: cover; ">
+	<header>
+		<div class="logo-contenedor">
+			<img class="logo"
+				src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png"
+				alt="">
+		</div>
+		
+	</header>
 	<h1 class="text-center"
-	    style="font-family: 'Times New Roman'; font-size: 80px; color: saddlebrown; font-weight: bold;"> Bienvenido
+		style=" font-size: 80px; color: orangered; font-weight: bold;"> Bienvenido
 	</h1>
-	<h3 class="text-center" style="font-family: Georgia; color: brown; font-weight: bold;"> Empleado de Renta Car </h3>
-	<form style="margin-bottom: 10px;" th:action="@{/empleados/buscar_placa}" th:method="GET">
+	<h3 class="text-center" style=" color: #000000; font-weight: bold;"> Empleado de Renta Car </h3>
+	<form th:action="@{/clientes/nuevoCliente}" th:method="GET" style="margin-bottom: 10px;">
 		<div class="d-grid gap-2 col-6 mx-auto">
-			<input class="btn btn-dark" type="submit" value="Buscar por Placa">
+			<input class="btn btn-dark" type="submit" value="Registrar cliente">
 		</div>
 	</form>
-	<form style="margin-bottom: 10px;" th:action="@{/empleados/nuevoCliente}" th:method="GET">
+	<form th:action="@{/empleados/buscar_cliente}" th:method="GET" style="margin-bottom: 10px;">
 		<div class="d-grid gap-2 col-6 mx-auto">
-			<input class="btn btn-dark" type="submit" value="Registrar Nuevo Cliente">
+			<input class="btn btn-dark" type="submit" value="Buscar cliente">
 		</div>
 	</form>
-	<form style="margin-bottom: 10px;" th:action="@{/empleados/buscar_cliente}" th:method="GET">
+	<form th:action="@{/empleados/nuevo_vehiculo}" th:method="GET" style="margin-bottom: 10px;">
 		<div class="d-grid gap-2 col-6 mx-auto">
-			<input class="btn btn-dark" type="submit" value="Buscar Cliente">
+			<input class="btn btn-dark" type="submit" value="Ingresar un vehículo">
 		</div>
 	</form>
-	<form style="margin-bottom: 10px;" th:action="@{/empleados/nuevo_vehiculo}" th:method="GET">
+	<form th:action="@{/clientes/inicioClientes}" th:method="GET" style="margin-bottom: 10px;">
 		<div class="d-grid gap-2 col-6 mx-auto">
-			<input class="btn btn-dark" type="submit" value="Ingresar Vehículo">
+			<input class="btn btn-dark" type="submit" value="Buscar vehículo">
 		</div>
 	</form>
-	<form style="margin-bottom: 10px;" th:action="@{/empleados/retirar_vehiculo}" th:method="GET">
+	<form th:action="@{/empleados/retirar_vehiculo}" th:method="GET" style="margin-bottom: 10px;">
 		<div class="d-grid gap-2 col-6 mx-auto">
-			<input class="btn btn-dark" type="submit" value="Retirar Vehículo Sin Reservar">
+			<input class="btn btn-dark" type="submit" value="Retirar un vehículo reservado">
+		</div>
+	</form>
+	<form th:action="@{/reportes/vehiculosVIP}" th:method="GET" style="margin-bottom: 10px;">
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<input class="btn btn-dark" type="submit" value="Retirar un vehículo sin reserva">
 		</div>
 	</form>
 	
-	<form style="margin-bottom: 10px;" th:action="@{/reportes/reservas}" th:method="GET">
-		<div class="d-grid gap-2 col-6 mx-auto">
-			<input class="btn btn-dark" type="submit" value="Informe Reservas">
-		</div>
-	</form>
-	
-	</body>
-	
-	</html>
+
+</body>
+
+</html>

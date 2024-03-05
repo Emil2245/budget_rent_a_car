@@ -1,6 +1,5 @@
 package com.uce.edu.avanzada.budget_rent_a_car.controller;
 
-import com.uce.edu.avanzada.budget_rent_a_car.repository.IClienteRepository;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IClienteService;
@@ -25,7 +24,6 @@ public class ClienteController {
     private IClienteService iClienteService;
     @Autowired
     private IVehiculoService iVehiculoService;
-
 
     // http://localhost:8080/budget/clientes/inicioClientes
     @GetMapping("/inicioClientes")
@@ -68,13 +66,11 @@ public class ClienteController {
         cliente.setRegistro("E"); // E -> Empleado
         this.iClienteService.crear(cliente);
 
-        // TODO Cambiar redirect a una vista de empleado
         return "redirect:/budget/clientes/inicioClientes";
     }
 
     @PostMapping("/buscarVehículos")
     public String buscarVehiculos(Cliente cliente) {
-        // TODO guardar cliente
         return "redirect:/budget/clientes/inicioClientes";
     }
 
