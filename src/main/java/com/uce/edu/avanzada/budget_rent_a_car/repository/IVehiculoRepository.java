@@ -27,7 +27,9 @@ public interface IVehiculoRepository {
 
     List<Vehiculo> reporteVehiculo(LocalDate fecha);
 
-    List<Vehiculo> buscarTodosDisponibles();
+    List<Vehiculo> buscarTodos();
+    List<Vehiculo> buscarTodosSoloDisponibles();
+
 
     List<Vehiculo> buscarAvaluo(String avaluo);
 

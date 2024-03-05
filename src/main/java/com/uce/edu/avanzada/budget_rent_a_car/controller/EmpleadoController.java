@@ -107,7 +107,7 @@ public class EmpleadoController {
 
     @GetMapping("/lista_vehiculos")
     public String listaVehiculos(Model modelo) {
-        List<Vehiculo> listaVehiculos = this.iVehiculoService.buscarTodosDisponibles();
+        List<Vehiculo> listaVehiculos = this.iVehiculoService.buscarTodos();
         modelo.addAttribute("vehiculos", listaVehiculos);
 
         return "vistaListaVehiculos";
@@ -131,7 +131,7 @@ public class EmpleadoController {
 
     @GetMapping("/retirar_vehiculo")
     public String retirarSinReserva(Model modelo) {
-        List<Vehiculo> lista = this.iVehiculoService.buscarTodosDisponibles();
+        List<Vehiculo> lista = this.iVehiculoService.buscarTodos();
         modelo.addAttribute("lista", lista);
         return "vistaRetirarSinReservar";
     }

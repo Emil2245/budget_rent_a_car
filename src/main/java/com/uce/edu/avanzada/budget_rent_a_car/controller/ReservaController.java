@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -32,12 +33,16 @@ public class ReservaController {
         LocalDate fechaInicio = reservaClienteTO.getFechaInicioReserva();
         LocalDate fechaFin = reservaClienteTO.getFechaFinReserva();
 
+//        boolean auxVengoDesdeSinReserva = reservaClienteTO.isAuxSinReserva();
+
         if (cedula.isEmpty() || placa.isEmpty() || fechaInicio == null || fechaFin == null)
             return "redirect:/budget/clientes/inicioClientes";
         boolean estaVehiculoDisponible = !this.iReservaService.verificar(fechaInicio, fechaFin, placa);
 
         if (!estaVehiculoDisponible) {
-            String fechaDondeEstaraDisponible = "01/01/test"; //TODO Falra funcionalidad para esto en service
+            String fechaDondeEstaraDisponible = "01/01/falta"; //TODO Falta funcionalidad para esto en service
+            // List<LocalDate> cuandoEstaraDisponible(placa)
+
             model.addAttribute("fechaDondeEstaraDisponible", fechaDondeEstaraDisponible);
             return "reservas/vistaVehiculoNoDisponible";
         }
@@ -52,6 +57,8 @@ public class ReservaController {
 
         model.addAttribute("vehiculoDisponible", vehiculo);
         model.addAttribute("reservaClienteTO", reservaClienteTO);
+
+
         return "reservas/vistaPagarReserva";
     }
 
@@ -62,6 +69,7 @@ public class ReservaController {
         String placa = reservaClienteTO.getPlacaVehiculo();
         String cedula = reservaClienteTO.getCedulaCliente();
         String numTargeta = reservaClienteTO.getNumTargetaReserva();
+        boolean auxVengoDesdeSinReserva = reservaClienteTO.isAuxSinReserva();
 
         if (numTargeta.isEmpty()) {
             return "";
@@ -69,25 +77,33 @@ public class ReservaController {
 
         String codigoReserva = this.iReservaService.reservar(fechaInicio, fechaFin, placa, cedula, numTargeta);
         model.addAttribute("codigoReserva", codigoReserva);
+
+        if (auxVengoDesdeSinReserva)
+            return "redirect:/budget/reservas/retirarSinReserva/" + codigoReserva;
         return "reservas/vistaPagoExitoso";
     }
 
     // RETIRAR SIN RESERVA
     @GetMapping("/mostrarRetirarSinReserva")
     public String mostrarVistaRetirarSinReserva(Model model, ReservaClienteTO reservaClienteTO) {
-        model.addAttribute("reservaClienteTO", new ReservaClienteTO());
+        reservaClienteTO.setAuxSinReserva(true);
 
-        String marca = reservaClienteTO.getMarcaVehiculo();
-        String modelo = reservaClienteTO.getModeloVehiculo();
+        model.addAttribute("reservaClienteTO", reservaClienteTO);
 
         try {
-            List<Vehiculo> vehiculosFiltrados = this.iVehiculoService.buscarVehiculosPorMarcaYModelo(marca, modelo);
-            model.addAttribute("vehiculos", vehiculosFiltrados);
+            List<Vehiculo> vehiculosDisponibles = this.iVehiculoService.buscarTodosSoloDisponibles();
+            model.addAttribute("vehiculos", vehiculosDisponibles);
         } catch (Exception e) {
             model.addAttribute("vehiculos", Arrays.asList(new Vehiculo()));
         }
 
-        return "reservas/vistaRetirarSinReserva";
+        return "reservas/vistaRetirarSinReservaInicio";
+    }
+
+    @GetMapping("/retirarSinReserva/{codigoReserva}")
+    public String retirarSinReserva(@PathVariable(value = "codigoReserva") String codigoReserva) {
+        //TODO Aqui el codigo que retire la reserva con el codigo pasado por parametro (URL)
+        return "reservas/vistaRetiradoSinReserva";
     }
 
 }

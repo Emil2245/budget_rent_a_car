@@ -29,7 +29,8 @@ public interface IVehiculoService {
 	// Vehiculos VIP
 	List<Vehiculo> vehiculosVIP(LocalDate fecha);
 
-	List<Vehiculo> buscarTodosDisponibles();
+	List<Vehiculo> buscarTodos();
+	List<Vehiculo> buscarTodosSoloDisponibles();
 
 	Double calcularSubtotal(Vehiculo vehiculo);
 

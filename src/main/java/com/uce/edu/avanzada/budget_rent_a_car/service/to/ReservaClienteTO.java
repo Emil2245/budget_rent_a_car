@@ -13,6 +13,7 @@ public class ReservaClienteTO {
     private String numTargetaReserva;
     private BigDecimal totalReserva;
     private String codigoReserva;
+    private boolean auxSinReserva;
 
     // GET Y SET
     public String getCedulaCliente() {
@@ -85,6 +86,14 @@ public class ReservaClienteTO {
 
     public void setCodigoReserva(String codigoReserva) {
         this.codigoReserva = codigoReserva;
+    }
+
+    public boolean isAuxSinReserva() {
+        return auxSinReserva;
+    }
+
+    public void setAuxSinReserva(boolean auxSinReserva) {
+        this.auxSinReserva = auxSinReserva;
     }
 
     @Override
