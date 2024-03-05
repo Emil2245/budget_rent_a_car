@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <label class="fw-bold">Avalúo:</label>
-                    <span th:text="${vehiculoDisponible.avaluo}">30000 UDS</span>
+                    <span th:text="${vehiculoDisponible.avaluo}">30000</span><span>$</span>
                 </div>
                 <div>
                     <label class="fw-bold">Valor por día :</label>
@@ -71,12 +71,12 @@
 
         <section class="my-2 row d-flex align-items-center px-2">
             <div class="col-2">
-                <label class="fw-bold form-label">Fecha de inicio</label>
-                <span th:text="${reservaClienteTO.fechaInicioReserva}">03/03/2024</span>
+                <label class="fw-bold form-label">Fecha inicio</label>
+                <span th:text="${reservaClienteTO.fechaInicioReserva}">03/03/test</span>
             </div>
             <div class="col-2">
                 <label class="fw-bold form-label">Fecha final</label>
-                <span th:text="${reservaClienteTO.fechaFinReserva}">07/03/2024</span>
+                <span th:text="${reservaClienteTO.fechaFinReserva}">07/03/test</span>
             </div>
             <div class="col-2">
                 <label class="fw-bold form-label">Valor total</label>
@@ -86,12 +86,18 @@
                 <label class="fw-bold ">Tarjeta de crédito</label>
                 <input type="number" class="form-input" th:field="${reservaClienteTO.numTargetaReserva}">
             </div>
+
             <div class="col-3 text-center d-flex flex-column gap-2">
                 <button type="submit" class="btn btn-success">Realizar pago</button>
                 <button type="button" class="btn btn-danger" onclick="goBack()">Cancelar</button>
             </div>
         </section>
     </main>
+    <input type="text" th:field="${reservaClienteTO.cedulaCliente}" class="d-none">
+    <input type="text" th:field="${reservaClienteTO.placaVehiculo}" class="d-none">
+    <input type="text" th:field="${reservaClienteTO.fechaInicioReserva}" class="d-none">
+    <input type="text" th:field="${reservaClienteTO.fechaFinReserva}" class="d-none">
+
 </form>
 
 <script>

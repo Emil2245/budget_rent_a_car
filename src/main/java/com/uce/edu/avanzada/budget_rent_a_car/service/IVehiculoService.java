@@ -19,7 +19,7 @@ public interface IVehiculoService {
 	void borrarDisponible(Integer id, Boolean D);
 
 	// Buscar vehiculosDisponibles
-	List<Vehiculo> buscarVehiculosDisponibles(String marca, String modelo);
+	List<Vehiculo> buscarVehiculosPorMarcaYModelo(String marca, String modelo);
 
 	// BUSCAR PLACA
 	Vehiculo buscarPlaca(String placa);
