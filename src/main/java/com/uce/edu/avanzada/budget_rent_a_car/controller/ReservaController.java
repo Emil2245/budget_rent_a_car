@@ -7,11 +7,13 @@ import com.uce.edu.avanzada.budget_rent_a_car.service.to.ReservaClienteTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -68,6 +70,24 @@ public class ReservaController {
         String codigoReserva = this.iReservaService.reservar(fechaInicio, fechaFin, placa, cedula, numTargeta);
         model.addAttribute("codigoReserva", codigoReserva);
         return "reservas/vistaPagoExitoso";
+    }
+
+    // RETIRAR SIN RESERVA
+    @GetMapping("/mostrarRetirarSinReserva")
+    public String mostrarVistaRetirarSinReserva(Model model, ReservaClienteTO reservaClienteTO) {
+        model.addAttribute("reservaClienteTO", new ReservaClienteTO());
+
+        String marca = reservaClienteTO.getMarcaVehiculo();
+        String modelo = reservaClienteTO.getModeloVehiculo();
+
+        try {
+            List<Vehiculo> vehiculosFiltrados = this.iVehiculoService.buscarVehiculosPorMarcaYModelo(marca, modelo);
+            model.addAttribute("vehiculos", vehiculosFiltrados);
+        } catch (Exception e) {
+            model.addAttribute("vehiculos", Arrays.asList(new Vehiculo()));
+        }
+
+        return "reservas/vistaRetirarSinReserva";
     }
 
 }

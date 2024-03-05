@@ -45,10 +45,17 @@ public class ClienteController {
 
 
     @GetMapping("/nuevoCliente")
-    public String registrarNuevo(Model model) {
+    public String registrarNuevoDesdeEmpleado(Model model) {
         Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
         return "clientes/vistaNuevoCliente";
+    }
+
+    @GetMapping("/nuevoClienteDesdeEmpleado")
+    public String registrarNuevo(Model model) {
+        Cliente cliente = new Cliente();
+        model.addAttribute("cliente", cliente);
+        return "clientes/vistaNuevoClienteDesdeEmpleado";
     }
 
 
@@ -66,7 +73,7 @@ public class ClienteController {
         cliente.setRegistro("E"); // E -> Empleado
         this.iClienteService.crear(cliente);
 
-        return "redirect:/budget/clientes/inicioClientes";
+        return "redirect:/empleados/inicio";
     }
 
     @PostMapping("/buscarVehículos")
