@@ -24,10 +24,10 @@
     </button>
 </header>
 
-<main class="contenedor-mediano">
-    <form th:action="@{/budget/clientes/registrar}" th:object="${cliente}" th:method="POST">
+<main class="contenedor-mediano bg-light">
+    <form th:action="@{/budget/clientes/registrarDesdeCliente}" th:object="${cliente}" th:method="POST">
 
-        <h1>Ingrese sus datos </h1>
+        <h3>Ingrese sus datos </h3>
         <table class="table-contenedor">
             <tr>
                 <label class="form-label">Cédula:</label>

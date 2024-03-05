@@ -99,7 +99,7 @@ public class VehiculoServiceImpl implements IVehiculoService {
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
-	public List<Vehiculo> buscarVehiculosDisponibles(String marca, String modelo) {
+	public List<Vehiculo> buscarVehiculosPorMarcaYModelo(String marca, String modelo) {
 		return this.vehiculoRepository.buscar(marca, modelo);
 	}
 
