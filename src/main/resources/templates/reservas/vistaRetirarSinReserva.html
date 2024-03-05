@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/header.css" type="text/css">
+    <link rel="stylesheet" href="/css/form.css" type="text/css">
+    <link rel="stylesheet" href="/css/contenedores.css" type="text/css">
+</head>
+<body style="background-image: url(https://a0.cdnfan.com/images/M/3/2/8/5/_hd_97072.jpg); background-repeat: no-repeat;
+  background-size: cover; ">
+
+<header>
+    <div class="logo-contenedor">
+        <img class="logo"
+             src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png"
+             alt="logo-budget">
+    </div>
+    <button class="btn btn-warning fw-bold" onclick="window.location.href='/budget/clientes/nuevoCliente'">
+        Registrarse
+    </button>
+</header>
+
+<!--<h5 class="container mx-auto mt-4">Buscar vehículos</h5>-->
+<!--<form th:action="@{/budget/clientes/inicioClientes}" th:object="${reservaClienteTO}" th:method="GET">-->
+
+<!--    <main class="container mx-auto bg-light p-3 rounded-3 row">-->
+<!--        <section class="row col-10">-->
+<!--            <div class="col-6">-->
+<!--                <label class="form-label">Marca:</label>-->
+<!--                <input type="text" class="form-input" th:field="${reservaClienteTO.marcaVehiculo}">-->
+<!--            </div>-->
+
+<!--            <div class="col-6">-->
+<!--                <label class="form-label">Modelo:</label>-->
+<!--                <input type="text" class="form-input" th:field="${reservaClienteTO.modeloVehiculo}">-->
+<!--            </div>-->
+<!--        </section>-->
+
+
+<!--        <section class="col-2 d-flex justify-content align-items-center mx-auto">-->
+<!--            <button class="btn btn-primary fw-bold flex-fill">Buscar</button>-->
+<!--        </section>-->
+
+<!--    </main>-->
+<!--</form>-->
+
+<h5 class="container mx-auto mt-2">Reservar vehículo</h5>
+<form th:action="@{/budget/reservas/verDisponibilidad}" th:object="${reservaClienteTO}" th:method="POST">
+    <main class="container mx-auto bg-light p-3 rounded-3 row">
+
+        <section class="row col-10">
+            <div class="col-6">
+                <label class="form-label">Vehículo (placa):</label>
+                <input type="text" class="form-input" th:field="${reservaClienteTO.placaVehiculo}">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Desde</label>
+                <input type="date" class="form-input" th:field="${reservaClienteTO.fechaInicioReserva}">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Cédula (cliente):</label>
+                <input type="text" class="form-input" th:field="${reservaClienteTO.cedulaCliente}">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Hasta:</label>
+                <input type="date" class="form-input" th:field="${reservaClienteTO.fechaFinReserva}">
+            </div>
+        </section>
+
+        <section class="col-2 d-flex justify-content align-items-center mx-auto">
+            <button type="submit" class="btn btn-primary fw-bold flex-fill">Ver disponibilidad</button>
+        </section>
+
+    </main>
+</form>
+
+<section class="container px-4 py-1 bg-light mt-4 rounded-3">
+    <table class="table table-striped table-thin table-sm">
+        <thead class="fw-bold">
+        <tr>
+            <td>Placa</td>
+            <td>Modelo</td>
+            <td>Marca</td>
+            <td>Año de fabricación</td>
+            <td>Estado</td>
+            <td>Valor por día</td>
+        </thead>
+        <tbody>
+        <tr th:each="vehiculo:${vehiculos}">
+            <td th:text="${vehiculo.placa}"></td>
+            <td th:text="${vehiculo.modelo}"></td>
+            <td th:text="${vehiculo.marca}"></td>
+            <td th:text="${vehiculo.anioFabricacion}"></td>
+            <td th:text="${vehiculo.estado}"></td>
+            <td th:text="${vehiculo.valorDia}"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+</body>
+</html>
