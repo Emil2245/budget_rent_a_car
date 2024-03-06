@@ -4,13 +4,10 @@ import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReservaDTO;
-import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.VehiculoDTO;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IClienteService;
-import com.uce.edu.avanzada.budget_rent_a_car.service.IEmpleadoService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IReservaService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IVehiculoService;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +31,7 @@ public class EmpleadoController {
     @Autowired
     private IReservaService iReservaService;
 
-    private static final Logger LOG = Logger.getLogger(EmpleadoController.class);
 
-    @Autowired
-    private IEmpleadoService iEmpleadoService;
 
     // http://localhost:8085/empleados/inicio
     @GetMapping("/inicio")
@@ -151,7 +145,6 @@ public class EmpleadoController {
         try {
         	if (this.iReservaService.verificar(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
                     reservaDTO.getPlaca())) {
-                LOG.warn("Error al confirmar su reserva");
                 return "vistaError";
             } else {
                 var total = this.iReservaService

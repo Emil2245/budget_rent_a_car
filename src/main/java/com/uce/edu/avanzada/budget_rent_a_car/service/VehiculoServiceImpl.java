@@ -3,7 +3,6 @@ package com.uce.edu.avanzada.budget_rent_a_car.service;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.IVehiculoRepository;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
-import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.VehiculoDTO;
 
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
@@ -52,8 +51,6 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	public Vehiculo buscarPlaca(String placa) {
 		return this.vehiculoRepository.buscarPlaca(placa);
 	}
-
-	
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
