@@ -4,6 +4,7 @@ import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReservaDTO;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.VehiculoDTO;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IClienteService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IEmpleadoService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IReservaService;
@@ -113,7 +114,7 @@ public class EmpleadoController {
         return "vistaListaVehiculos";
     }
 
-    // http://localhost:8080/rentaCar/empleados/vehiculos_placa
+    // http://localhost:8085/empleados/vehiculos_placa
     @GetMapping("/vehiculos_placa")
     public String vehiculosP(Vehiculo vehiculo, Model modelo) {
         List<Vehiculo> lista = new ArrayList<>();

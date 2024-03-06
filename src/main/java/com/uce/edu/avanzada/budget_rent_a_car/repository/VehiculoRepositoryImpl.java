@@ -53,14 +53,7 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
     }
 
     // Obtener vehiculoDTO por placa
-    @Override
-    @Transactional(value = TxType.NOT_SUPPORTED)
-    public VehiculoDTO buscarPorPlaca(String placa) {
-        return this.entityManager
-                .createQuery("SELECT new com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.VehiculoDTO(e.placa, e.modelo,e.marca, e.anioFabricacion, e.estado, e.valorDia) from Vehiculo e WHERE e.placa = :datoPlaca", VehiculoDTO.class)
-                .setParameter("datoPlaca", placa)
-                .getSingleResult();
-    }
+   
 
     // buscar por placa
     @Override

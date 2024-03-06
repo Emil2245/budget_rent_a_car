@@ -20,94 +20,95 @@ import java.util.List;
 @Controller
 @RequestMapping("/reservas")
 public class ReservaController {
-    @Autowired
-    private IReservaService iReservaService;
+	@Autowired
+	private IReservaService iReservaService;
 
-    @Autowired
-    private IVehiculoService iVehiculoService;
+	@Autowired
+	private IVehiculoService iVehiculoService;
 
-    @PostMapping("/verDisponibilidad")
-    public String verDisponibilidad(Model model, ReservaClienteTO reservaClienteTO) {
-        String cedula = reservaClienteTO.getCedulaCliente();
-        String placa = reservaClienteTO.getPlacaVehiculo();
-        LocalDate fechaInicio = reservaClienteTO.getFechaInicioReserva();
-        LocalDate fechaFin = reservaClienteTO.getFechaFinReserva();
+	@PostMapping("/verDisponibilidad")
+	public String verDisponibilidad(Model model, ReservaClienteTO reservaClienteTO) {
+		String cedula = reservaClienteTO.getCedulaCliente();
+		String placa = reservaClienteTO.getPlacaVehiculo();
+		LocalDate fechaInicio = reservaClienteTO.getFechaInicioReserva();
+		LocalDate fechaFin = reservaClienteTO.getFechaFinReserva();
 
 //        boolean auxVengoDesdeSinReserva = reservaClienteTO.isAuxSinReserva();
 
-        if (cedula.isEmpty() || placa.isEmpty() || fechaInicio == null || fechaFin == null)
-            return "redirect:/clientes/inicioClientes";
-        boolean estaVehiculoDisponible = !this.iReservaService.verificar(fechaInicio, fechaFin, placa);
+		if (cedula.isEmpty() || placa.isEmpty() || fechaInicio == null || fechaFin == null)
+			return "redirect:/clientes/inicioClientes";
+		boolean estaVehiculoDisponible = !this.iReservaService.verificar(fechaInicio, fechaFin, placa);
 
-        if (!estaVehiculoDisponible) {
-            //TODO Falta funcionalidad para esto en service
-            StringBuilder fechasDondeEstaOcupado = new StringBuilder();
-            List<String> intervalos = this.iReservaService.calcularIntervaloDias(fechaInicio, fechaFin, placa);
-            for (String intervalo : intervalos) {
-                fechasDondeEstaOcupado.append(intervalo);
-            }
+		if (!estaVehiculoDisponible) {
+			// TODO Falta funcionalidad para esto en service
+			StringBuilder fechasDondeEstaOcupado = new StringBuilder();
+			List<String> intervalos = this.iReservaService.calcularIntervaloDias(fechaInicio, fechaFin, placa);
+			for (String intervalo : intervalos) {
+				fechasDondeEstaOcupado.append(intervalo);
+			}
 
-            model.addAttribute("fechasDondeEstaOcupado", fechasDondeEstaOcupado);
-            return "reservas/vistaVehiculoNoDisponible";
-        }
+			model.addAttribute("fechasDondeEstaOcupado", fechasDondeEstaOcupado);
+			return "reservas/vistaVehiculoNoDisponible";
+		}
 
-        Vehiculo vehiculo = this.iVehiculoService.buscarPlaca(placa);
-        if (vehiculo.getUrlImagen() == null)
-            vehiculo.setUrlImagen("https://th.bing.com/th/id/OIG2.rKHSGXziRWnPAtOzQu86?w=1024&h=1024&rs=1&pid=ImgDetMain");
+		Vehiculo vehiculo = this.iVehiculoService.buscarPlaca(placa);
+		if (vehiculo.getUrlImagen() == null)
+			vehiculo.setUrlImagen(
+					"https://th.bing.com/th/id/OIG2.rKHSGXziRWnPAtOzQu86?w=1024&h=1024&rs=1&pid=ImgDetMain");
 
-        List<BigDecimal> valoresPago = this.iReservaService.calcularValorTotal(fechaInicio, fechaFin, placa);
-        BigDecimal valorTotal = valoresPago.get(2);
-        reservaClienteTO.setTotalReserva(valorTotal);
+		List<BigDecimal> valoresPago = this.iReservaService.calcularValorTotal(fechaInicio, fechaFin, placa);
+		BigDecimal valorTotal = valoresPago.get(2);
+		reservaClienteTO.setTotalReserva(valorTotal);
 
-        model.addAttribute("vehiculoDisponible", vehiculo);
-        model.addAttribute("reservaClienteTO", reservaClienteTO);
+		model.addAttribute("vehiculoDisponible", vehiculo);
+		model.addAttribute("reservaClienteTO", reservaClienteTO);
 
+		return "reservas/vistaPagarReserva";
+	}
 
-        return "reservas/vistaPagarReserva";
-    }
+	@PostMapping("/pagar")
+	public String reservar(Model model, ReservaClienteTO reservaClienteTO) {
+		LocalDate fechaInicio = reservaClienteTO.getFechaInicioReserva();
+		LocalDate fechaFin = reservaClienteTO.getFechaFinReserva();
+		String placa = reservaClienteTO.getPlacaVehiculo();
+		String cedula = reservaClienteTO.getCedulaCliente();
+		String numTargeta = reservaClienteTO.getNumTargetaReserva();
+		boolean auxVengoDesdeSinReserva = reservaClienteTO.isAuxSinReserva();
 
-    @PostMapping("/pagar")
-    public String reservar(Model model, ReservaClienteTO reservaClienteTO) {
-        LocalDate fechaInicio = reservaClienteTO.getFechaInicioReserva();
-        LocalDate fechaFin = reservaClienteTO.getFechaFinReserva();
-        String placa = reservaClienteTO.getPlacaVehiculo();
-        String cedula = reservaClienteTO.getCedulaCliente();
-        String numTargeta = reservaClienteTO.getNumTargetaReserva();
-        boolean auxVengoDesdeSinReserva = reservaClienteTO.isAuxSinReserva();
+		if (numTargeta.isEmpty()) {
+			return "";
+		}
 
-        if (numTargeta.isEmpty()) {
-            return "";
-        }
+		String codigoReserva = this.iReservaService.reservar(fechaInicio, fechaFin, placa, cedula, numTargeta);
+		model.addAttribute("codigoReserva", codigoReserva);
 
-        String codigoReserva = this.iReservaService.reservar(fechaInicio, fechaFin, placa, cedula, numTargeta);
-        model.addAttribute("codigoReserva", codigoReserva);
+		if (auxVengoDesdeSinReserva)
+			return "redirect:/reservas/retirarSinReserva/" + codigoReserva;
+		return "reservas/vistaPagoExitoso";
+	}
 
-        if (auxVengoDesdeSinReserva)
-            return "redirect:/reservas/retirarSinReserva/" + codigoReserva;
-        return "reservas/vistaPagoExitoso";
-    }
+	// RETIRAR SIN RESERVA
+	@GetMapping("/mostrarRetirarSinReserva")
+	public String mostrarVistaRetirarSinReserva(Model model, ReservaClienteTO reservaClienteTO) {
+		reservaClienteTO.setAuxSinReserva(true);
 
-    // RETIRAR SIN RESERVA
-    @GetMapping("/mostrarRetirarSinReserva")
-    public String mostrarVistaRetirarSinReserva(Model model, ReservaClienteTO reservaClienteTO) {
-        reservaClienteTO.setAuxSinReserva(true);
+		model.addAttribute("reservaClienteTO", reservaClienteTO);
 
-        model.addAttribute("reservaClienteTO", reservaClienteTO);
+		try {
+			List<Vehiculo> vehiculosDisponibles = this.iVehiculoService.buscarTodosSoloDisponibles();
+			model.addAttribute("vehiculos", vehiculosDisponibles);
+		} catch (Exception e) {
+			model.addAttribute("vehiculos", Arrays.asList(new Vehiculo()));
+		}
 
-        try {
-            List<Vehiculo> vehiculosDisponibles = this.iVehiculoService.buscarTodosSoloDisponibles();
-            model.addAttribute("vehiculos", vehiculosDisponibles);
-        } catch (Exception e) {
-            model.addAttribute("vehiculos", Arrays.asList(new Vehiculo()));
-        }
+		return "reservas/vistaRetirarSinReservaInicio";
+	}
 
-        return "reservas/vistaRetirarSinReservaInicio";
-    }
-
-    @GetMapping("/retirarSinReserva/{codigoReserva}")
-    public String retirarSinReserva(@PathVariable(value = "codigoReserva") String codigoReserva) {
-        //TODO Aqui el codigo que retire la reserva con el codigo pasado por parametro (URL)
-        return "reservas/vistaRetiradoSinReserva";
-    }
+	@GetMapping("/retirarSinReserva/{codigoReserva}")
+	public String retirarSinReserva(@PathVariable(value = "codigoReserva") String codigoReserva) {
+		// TODO Aqui el codigo que retire la reserva con el codigo pasado por parametro
+		// (URL)
+		return "reservas/vistaRetiradoSinReserva";
+	}
 
 }
