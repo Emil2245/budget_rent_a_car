@@ -1,6 +1,8 @@
 package com.uce.edu.avanzada.budget_rent_a_car.controller;
 
+import com.uce.edu.avanzada.budget_rent_a_car.repository.IClienteRepository;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
+import com.uce.edu.avanzada.budget_rent_a_car.service.IClienteService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IReservaService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IVehiculoService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.to.ReservaClienteTO;
@@ -26,6 +28,9 @@ public class ReservaController {
     @Autowired
     private IVehiculoService iVehiculoService;
 
+    @Autowired
+    private IClienteService iClienteService;
+
     @PostMapping("/verDisponibilidad")
     public String verDisponibilidad(Model model, ReservaClienteTO reservaClienteTO) {
         String cedula = reservaClienteTO.getCedulaCliente();
@@ -33,7 +38,18 @@ public class ReservaController {
         LocalDate fechaInicio = reservaClienteTO.getFechaInicioReserva();
         LocalDate fechaFin = reservaClienteTO.getFechaFinReserva();
 
+
+        // Si no llena ningun dato
         if (cedula.isEmpty() || placa.isEmpty() || fechaInicio == null || fechaFin == null) {
+            if (reservaClienteTO.isAuxSinReserva()) // Si viene http://localhost:8085/reservas/mostrarRetirarSinReserva
+                return "reservas/vistaRetirarSinReservaInicio";
+            return "redirect:/clientes/inicioClientes";
+        }
+
+        // Si la cedula no existe
+        try {
+            this.iClienteService.buscarPorCedula(cedula);
+        } catch (Exception e) {
             if (reservaClienteTO.isAuxSinReserva()) // Si viene http://localhost:8085/reservas/mostrarRetirarSinReserva
                 return "reservas/vistaRetirarSinReservaInicio";
             return "redirect:/clientes/inicioClientes";
