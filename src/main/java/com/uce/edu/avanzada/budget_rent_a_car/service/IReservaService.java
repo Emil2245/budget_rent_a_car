@@ -1,6 +1,7 @@
 package com.uce.edu.avanzada.budget_rent_a_car.service;
 
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReporteDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,6 +30,6 @@ public interface IReservaService {
 
 	String getReserva(String codigo);
 	void retirar(String codigoReserva);
-	
+	 List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin);
 
 }
