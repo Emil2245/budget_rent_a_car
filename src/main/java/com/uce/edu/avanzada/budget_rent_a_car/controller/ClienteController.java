@@ -24,7 +24,7 @@ public class ClienteController {
     @Autowired
     private IVehiculoService iVehiculoService;
 
-    // http://localhost:8080/clientes/inicioClientes
+    // http://localhost:8085/clientes/inicioClientes
     @GetMapping("/inicioClientes")
     public String mostrarInicio(Model model, ReservaClienteTO reservaClienteTO) {
         model.addAttribute("reservaClienteTO", new ReservaClienteTO());
