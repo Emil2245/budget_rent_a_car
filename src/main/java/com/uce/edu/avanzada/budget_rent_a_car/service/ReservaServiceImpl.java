@@ -169,7 +169,7 @@ public class ReservaServiceImpl implements IReservaService {
 	@Override
 	public List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin) {
 		// TODO Auto-generated method stub
-		return this.reporteDeReservasDTO(inicio, fin);
+		return this.iReservaRepository.reporteDeReservasDTO(inicio, fin);
 	}
 
 }

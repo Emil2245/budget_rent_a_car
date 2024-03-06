@@ -29,7 +29,7 @@
 	</header>
 
 	<h5 class="container mx-auto mt-2 fs-2 fw-bold">Reporte de reservas</h5>
-	<form th:action="@{/reportes/verReporteReservas}" th:object="${reservaClienteTO}" th:method="GET">
+	<form th:action="@{/reportes/verReporteReserva}" th:object="${reservaClienteTO}" th:method="GET">
 		<main class="container mx-auto bg-light p-3 rounded-3 row">
 
 			<section class="row col-10">
@@ -70,6 +70,7 @@
 					<td th:text="${reserva.nombre}"></td>
 					<td th:text="${reserva.apellido}"></td>
 					<td th:text="${reserva.modelo}"></td>
+					<td th:text="${reserva.placa}"></td>
 					<td th:text="${reserva.fechaInicio}"></td>
 					<td th:text="${reserva.fechaFin}"></td>
 					<td th:text="${reserva.subtotal}"></td>
