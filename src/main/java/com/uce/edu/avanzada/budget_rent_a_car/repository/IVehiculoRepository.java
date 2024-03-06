@@ -21,7 +21,7 @@ public interface IVehiculoRepository {
 
     Integer actualizarEstado(String placa);
 
-    VehiculoDTO buscarPorPlaca(String placa);
+   
 
     List<Vehiculo> buscar(String marca, String modelo);
 

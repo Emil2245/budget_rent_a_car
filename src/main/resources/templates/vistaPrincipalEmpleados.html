@@ -1,66 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-          name="viewport">
-    <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/header.css" type="text/css">
-    <link rel="stylesheet" href="/css/form.css" type="text/css">
-    <link rel="stylesheet" href="/css/contenedores.css" type="text/css">
+	<meta charset="UTF-8">
+	<meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+		name="viewport">
+	<meta content="ie=edge" http-equiv="X-UA-Compatible">
+	<title>Register</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/header.css" type="text/css">
+	<link rel="stylesheet" href="/css/form.css" type="text/css">
+	<link rel="stylesheet" href="/css/contenedores.css" type="text/css">
+	<style>
+		/* Estilos personalizados */
+		body {
+			background-image: url(https://a0.cdnfan.com/images/M/3/2/8/5/_hd_97072.jpg);
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		header {
+			background-color: #333;
+			/* Color de fondo de la franja */
+			padding: 20px;
+			/* Espaciado interno */
+			text-align: center;
+			width: 100%;
+		}
+
+		.logo {
+			max-width: 200px;
+			margin: auto;
+			/* Centra horizontalmente */
+			display: block;
+			/* Para que funcione el margin: auto */
+		}
+
+		h1 {
+			font-size: 80px;
+			color: orangered;
+			font-weight: bold;
+			text-align: center;
+		}
+
+		h3 {
+			color: #000000;
+			font-weight: bold;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+
+		.form-container {
+			margin: 0 auto;
+			max-width: 400px;
+			padding: 20px;
+			background-color: rgba(255, 255, 255, 0.8);
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		}
+
+		.btn-container {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.btn {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+	</style>
 </head>
 
-<body style="background-image: url(https://a0.cdnfan.com/images/M/3/2/8/5/_hd_97072.jpg); background-repeat: no-repeat;
-  background-size: cover; ">
-<header>
-    <div class="logo-contenedor">
-        <img class="logo"
-             src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png"
-             alt="">
-    </div>
+<body>
+	<header>
+		<img class="logo"
+			src="https://www.budgetstt.com/images/logos/logo-02-budget-rent-a-car-st-thomas-coolestcarib.png" alt="">
+	</header>
 
-</header>
-<h1 class="text-center"
-    style=" font-size: 80px; color: orangered; font-weight: bold;"> Bienvenido
-</h1>
-<h3 class="text-center" style=" color: #000000; font-weight: bold;"> Empleado de Renta Car </h3>
+	<h1> Bienvenido </h1>
+	<h3> Empleado de Renta Car </h3>
 
-<div class="d-grid gap-2 col-6 mx-auto" style="margin-bottom: 10px;">
-    <button class="btn btn-dark" onclick="window.location.href='/clientes/nuevoClienteDesdeEmpleado'">
-        Registrar cliente
-    </button>
-</div>
+	<div class="form-container">
+		<form th:action="@{/clientes/nuevoClienteDesdeEmpleado}" th:method="GET">
+			<div class="btn-container">
+				<input class="btn btn-dark" type="submit" value="Registrar cliente">
+			</div>
+		</form>
+		<form th:action="@{/empleados/buscar_cliente}" th:method="GET">
+			<div class="btn-container">
+				<input class="btn btn-dark" type="submit" value="Buscar cliente">
+			</div>
+		</form>
 
-<form th:action="@{/empleados/buscar_cliente}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Buscar cliente">
-    </div>
-</form>
-<form th:action="@{/empleados/nuevo_vehiculo}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Ingresar un vehículo">
-    </div>
-</form>
-<form th:action="@{/clientes/inicioClientes}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Buscar vehículo">
-    </div>
-</form>
-<form th:action="@{/empleados/retirar_vehiculo}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Retirar un vehículo reservado">
-    </div>
-</form>
-<form th:action="@{/reservas/mostrarRetirarSinReserva}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Retirar un vehículo sin reserva">
-    </div>
-</form>
+		<form th:action="@{/empleados/nuevo_vehiculo}" th:method="GET">
+			<div class="btn-container">
+				<input class="btn btn-dark" type="submit" value="Ingresar un vehículo">
+			</div>
+		</form>
 
+		<form th:action="@{/empleados/buscar_placa}" th:method="GET">
+			<div class="btn-container">
+				<input class="btn btn-dark" type="submit" value="Buscar vehículo">
+			</div>
+		</form>
+
+		<form th:action="@{/empleados/retirar_vehiculo}" th:method="GET">
+			<div class="btn-container">
+				<input class="btn btn-dark" type="submit" value="Retirar un vehículo reservado">
+			</div>
+		</form>
+
+		<form th:action="@{/reservas/mostrarRetirarSinReserva}" th:method="GET">
+			<div class="btn-container">
+				<input class="btn btn-dark" type="submit" value="Retirar un vehículo sin reserva">
+			</div>
+		</form>
+	</div>
 
 </body>
 
