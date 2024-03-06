@@ -31,7 +31,7 @@ public class ReporteController {
 	@PostMapping("/listaReservas")
 	public String listaReporteReservas(LocalDate fechaInicio, LocalDate fechaFinal, Model model) {
 		System.out.println("fechas: " + fechaFinal + " " + fechaInicio);
-		List<Reserva> lista = this.iReservaService.reporteReserva(fechaInicio, fechaFinal);
+		List<Reserva> lista = this.iReservaService.buscararReportesEntreFechas(fechaInicio, fechaFinal);
 		model.addAttribute("reservas", lista);
 		return "vListaReporteReserva";
 	}
@@ -42,11 +42,11 @@ public class ReporteController {
 		model.addAttribute("reservaClienteTO", new ReservaClienteTO());
 
 		try {
-			List<ReporteDTO> reporte = this.iReservaService.reporteDeReservasDTO(
+			List<ReporteDTO> reporte = this.iReservaService.listarReporteReservasDTO(
 					reservaClienteTO.getFechaInicioReserva(), reservaClienteTO.getFechaFinReserva());
 			model.addAttribute("listaReporte", reporte);
 		} catch (Exception e) {
-			model.addAttribute("listaReporte", Arrays.asList(new ReporteDTO()));
+			model.addAttribute("listaReporte", List.of(new ReporteDTO()));
 		}
 		return "reservas/vistaReporteReserva";
 

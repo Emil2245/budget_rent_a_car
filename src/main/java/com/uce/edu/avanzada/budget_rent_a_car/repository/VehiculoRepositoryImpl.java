@@ -25,7 +25,7 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public Vehiculo buscar(Integer id) {
+    public Vehiculo seleccionar(Integer id) {
         return this.entityManager.find(Vehiculo.class, id);
     }
 
@@ -36,15 +36,11 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
     }
 
     @Override
+    @Transactional(value = TxType.MANDATORY)
     public void eliminar(Integer id) {
-        Vehiculo vehi = this.buscar(id);
-        this.entityManager.remove(vehi);
+        this.entityManager.remove(this.seleccionar(id));
     }
 
-    // Obtener vehiculoDTO por placa
-   
-
-    // buscar por placa
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
     public Vehiculo buscarPlaca(String placa) {
@@ -54,7 +50,6 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
                 .getSingleResult();
     }
 
-    // Vehiculos VIP
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
     public List<Vehiculo> reporteVehiculo(LocalDate fecha) {
@@ -67,20 +62,21 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Vehiculo> buscarTodos() {
+    public List<Vehiculo> seleccionarTodos() {
         return this.entityManager.createQuery("SELECT v FROM Vehiculo v", Vehiculo.class)
                 .getResultList();
     }
 
     @Override
-    public List<Vehiculo> buscarTodosSoloDisponibles() {
+    @Transactional(value = TxType.NOT_SUPPORTED)
+    public List<Vehiculo> seleccionarTodosSoloDisponibles() {
         return this.entityManager.createQuery("SELECT v FROM Vehiculo v WHERE v.estado != 'Indisponible'", Vehiculo.class)
                 .getResultList();
     }
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Vehiculo> buscar(String marca, String modelo) {
+    public List<Vehiculo> seleccionarTodos(String marca, String modelo) {
         return this.entityManager
                 .createQuery("SELECT v FROM Vehiculo v WHERE v.marca=:datoMarca AND v.modelo=:datoModelo", Vehiculo.class)
                 .setParameter("datoMarca", marca)
@@ -91,7 +87,7 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Vehiculo> buscarAvaluo(String avaluo) {
+    public List<Vehiculo> seleccionarAvaluo(String avaluo) {
         return this.entityManager
                 .createQuery("SELECT v FROM Vehiculo v WHERE v.avaluo >=:datoAvaluo", Vehiculo.class)
                 .setParameter("datoAvaluo", avaluo)

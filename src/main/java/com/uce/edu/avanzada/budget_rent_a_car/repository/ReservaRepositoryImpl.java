@@ -49,7 +49,7 @@ public class ReservaRepositoryImpl implements IReservaRepository {
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
-	public List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin) {
+	public List<Reserva> seleccionarReportesEntreFechas(LocalDate inicio, LocalDate fin) {
 
 		return this.entityManager
 				.createQuery("SELECT r FROM Reserva r JOIN r.vehiculo v WHERE r.fechaInicio "
@@ -60,7 +60,8 @@ public class ReservaRepositoryImpl implements IReservaRepository {
 	}
 
 	@Override
-	public Reserva buscarCodigo(String codigo) {
+	@Transactional(TxType.NOT_SUPPORTED)
+	public Reserva seleccionarPorCodigo(String codigo) {
 		return this.entityManager
 				.createQuery("SELECT r FROM Reserva r JOIN r.vehiculo v JOIN r.cliente c WHERE r.codigo = :datoCodigo",
 						Reserva.class)
@@ -68,18 +69,8 @@ public class ReservaRepositoryImpl implements IReservaRepository {
 	}
 
 	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
-	public List<Reserva> buscarClientesVip() {
-
-		List<Reserva> reservas = this.entityManager
-				.createQuery("SELECT r FROM Reserva r JOIN r.cliente c ORDER BY r.total DESC", Reserva.class)
-				.getResultList();
-		reservas.parallelStream().forEach(r -> r.getCliente().getCedula());
-		return reservas;
-	}
-
-	@Override
-	public void retirar(String codigoReserva) {
+	@Transactional(TxType.MANDATORY)
+	public void actualizarPorCodigoReserva(String codigoReserva) {
 
 		Query consulta = this.entityManager
 				.createQuery("UPDATE Reserva r SET r.estado='E' WHERE r.codigo=:codigoReserva");
@@ -88,6 +79,7 @@ public class ReservaRepositoryImpl implements IReservaRepository {
 	}
 
 	@Override
+	@Transactional(TxType.NOT_SUPPORTED)
 	public List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin) {
 		String jpql = "SELECT new com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReporteDTO(c.cedula, c.nombre, c.apellido, v.placa, v.modelo, r.fechaInicio, r.fechaFin, r.subtotal, r.total, r.estado) FROM Reserva r JOIN r.cliente c JOIN r.vehiculo v "
 				+ "WHERE r.fechaInicio BETWEEN :datoFechaInicio AND :datoFechaFinal AND r.fechaFin "

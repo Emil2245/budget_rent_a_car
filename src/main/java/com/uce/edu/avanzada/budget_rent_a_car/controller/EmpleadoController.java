@@ -31,8 +31,6 @@ public class EmpleadoController {
     @Autowired
     private IReservaService iReservaService;
 
-
-
     // http://localhost:8085/empleados/inicio
     @GetMapping("/inicio")
     public String inicioEmpleados() {
@@ -47,7 +45,7 @@ public class EmpleadoController {
 
     @GetMapping("/lista_clientes")
     public String buscarClientes(Model modelo) {
-        List<Cliente> listaClientes = this.iClienteService.verClientes();
+        List<Cliente> listaClientes = this.iClienteService.buscarTodos();
         modelo.addAttribute("clientes", listaClientes);
 
         return "vistaListaClientesEmpleado";
@@ -55,7 +53,7 @@ public class EmpleadoController {
 
     @PostMapping("/guardar")
     public String registrar(Cliente cliente) {
-        this.iClienteService.crear(cliente);
+        this.iClienteService.guardar(cliente);
 
         return "redirect:/empleados/lista_clientes";
     }
@@ -142,7 +140,7 @@ public class EmpleadoController {
     @GetMapping("/confirmacion_reserva")
     public String confirmacionReserva(ReservaDTO reservaDTO, Model model, HttpSession session) {
         try {
-        	if (this.iReservaService.verificar(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
+        	if (this.iReservaService.verificarDisponibilidad(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
                     reservaDTO.getPlaca())) {
                 return "vistaError";
             } else {
@@ -157,9 +155,6 @@ public class EmpleadoController {
 		} catch (Exception e) {
 			return "redirect:/empleados/reservar";
 		}
-    	
-    	
-    	
 
     }
 
@@ -196,7 +191,7 @@ public class EmpleadoController {
     public String aplicar(Model model, HttpSession session) {
         String codigo = (String) session.getAttribute("codigo");
         System.out.println("Codigo " + codigo);
-        this.iReservaService.aplicar(codigo);
+        this.iReservaService.reservarEstado(codigo);
         return "vistaNotificacionReserva";
     }
 

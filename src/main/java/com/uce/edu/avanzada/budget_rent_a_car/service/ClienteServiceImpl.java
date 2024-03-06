@@ -18,7 +18,7 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional(value = TxType.REQUIRED)
-    public void crear(Cliente cliente) {
+    public void guardar(Cliente cliente) {
         this.iClienteRepository.insertar(cliente);
     }
 
@@ -30,7 +30,7 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Cliente> verClientes() {
+    public List<Cliente> buscarTodos() {
         return this.iClienteRepository.seleccionarTodosClientes();
     }
 

@@ -13,23 +13,23 @@ public interface IReservaService {
 
 	void actualizar(Reserva reserva);
 
-	Reserva buscar(Integer id);
+	Reserva buscarPorId(Integer id);
 
-	void borrar(Integer id);
+	void eliminar(Integer id);
 
-	Boolean verificar(LocalDate inicio, LocalDate FIN, String placa);
+	Boolean verificarDisponibilidad(LocalDate inicio, LocalDate FIN, String placa);
 	List<String> calcularIntervaloDias(LocalDate inicio, LocalDate FIN, String placa);
 
-	List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin);
+	List<Reserva> buscararReportesEntreFechas(LocalDate inicio, LocalDate fin);
 
 	List<BigDecimal> calcularValorTotal(LocalDate inicio, LocalDate fin, String placa);
 
 	String reservar(LocalDate inicio, LocalDate fin, String placa, String cedula, String tarjeta);
 
-	void aplicar(String reserva);
+	void reservarEstado(String reserva);
 
 	String getReserva(String codigo);
-	void retirar(String codigoReserva);
-	 List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin);
+	void actualizarPorCodigoReserva(String codigoReserva);
+	 List<ReporteDTO> listarReporteReservasDTO(LocalDate inicio, LocalDate fin);
 
 }

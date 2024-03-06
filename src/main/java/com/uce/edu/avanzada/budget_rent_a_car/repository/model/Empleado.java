@@ -32,10 +32,18 @@ public class Empleado {
 	@Column(name = "empl_contrasenia")
 	private String contrasenia;
 
+
 	@Override
 	public String toString() {
-		return "Empleado [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
-				+ ", fechaNacimiento=" + fechaNacimiento + ", genero=" + genero + "]";
+		return "Empleado{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", apellido='" + apellido + '\'' +
+				", cedula='" + cedula + '\'' +
+				", fechaNacimiento=" + fechaNacimiento +
+				", genero='" + genero + '\'' +
+				", contrasenia='" + contrasenia + '\'' +
+				'}';
 	}
 
 	public Integer getId() {

@@ -2,41 +2,32 @@ package com.uce.edu.avanzada.budget_rent_a_car.service;
 
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface IVehiculoService {
 
-	void guardar(Vehiculo vehiculo);
+    void guardar(Vehiculo vehiculo);
 
-	Vehiculo encontrar(Integer id);
+    Vehiculo buscarPorId(Integer id);
 
-	void actualizar(Vehiculo vehiculo);
+    void actualizar(Vehiculo vehiculo);
 
-	void borrar(Integer id);
+    void borrar(Integer id);
 
-	// BORRAR DISPONIBLE
-	void borrarDisponible(Integer id, Boolean D);
+    void borrarDisponible(Integer id, Boolean D);
 
-	// Buscar vehiculosDisponibles
-	List<Vehiculo> buscarVehiculosPorMarcaYModelo(String marca, String modelo);
+    List<Vehiculo> buscarVehiculosPorMarcaYModelo(String marca, String modelo);
 
-	// BUSCAR PLACA
-	Vehiculo buscarPlaca(String placa);
+    Vehiculo buscarPlaca(String placa);
 
-	List<Vehiculo> encontrarTodos();
+    List<Vehiculo> buscarTodos();
 
-	// Vehiculos VIP
-	List<Vehiculo> vehiculosVIP(LocalDate fecha);
+    List<Vehiculo> buscarTodosSoloDisponibles();
 
-	List<Vehiculo> buscarTodos();
+    Double calcularSubtotal(Vehiculo vehiculo);
 
-	List<Vehiculo> buscarTodosSoloDisponibles();
+    Double calcularTotal(Vehiculo vehiculo);
 
-	Double calcularSubtotal(Vehiculo vehiculo);
-
-	Double calcularTotal(Vehiculo vehiculo);
-
-	List<Vehiculo> reporteAvaluo(String avaluo);
+    List<Vehiculo> reporteAvaluo(String avaluo);
 
 }

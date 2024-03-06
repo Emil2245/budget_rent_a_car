@@ -51,7 +51,7 @@ public class Reserva {
     @JoinColumn(name = "rese_id_factura")
     private Factura factura;
 
-    //getters setters toString
+    //getters & setters toString
     @Override
     public String toString() {
         return "Reserva [id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", subtotal="

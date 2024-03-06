@@ -31,8 +31,14 @@ public class Factura {
 
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", iva=" + iva + ", subtotal=" + subtotal + ", total=" + total + ", numTarjeta="
-				+ numTarjeta + "]";
+		return "Factura{" +
+				"id=" + id +
+				", iva=" + iva +
+				", subtotal=" + subtotal +
+				", total=" + total +
+				", numTarjeta='" + numTarjeta + '\'' +
+				", reserva=" + reserva +
+				'}';
 	}
 
 	public Integer getId() {

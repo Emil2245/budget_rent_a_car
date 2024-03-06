@@ -10,6 +10,7 @@ public class VehiculoDTO {
 	private String anio;
 	private String estado;
 	private BigDecimal valor;
+	////////////////////////////////////
 
 	public VehiculoDTO() {
 	}
@@ -23,14 +24,14 @@ public class VehiculoDTO {
 		this.valor = valor;
 	}
 
-	// To String
+	// To String...
 	@Override
 	public String toString() {
 		return "VehiculoDTO [placa=" + placa + ", modelo=" + modelo + ", marca=" + marca + ", anio=" + anio
 				+ ", estado=" + estado + ", valor=" + valor + "]";
 	}
 
-	// SET Y GET
+	// SET & GET
 
 	public String getPlaca() {
 		return placa;

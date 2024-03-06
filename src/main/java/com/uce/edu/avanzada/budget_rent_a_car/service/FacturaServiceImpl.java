@@ -26,7 +26,7 @@ public class FacturaServiceImpl implements IFacturaService {
 
     @Override
     @Transactional(value = TxType.REQUIRED)
-    public void borrar(Integer id) {
+    public void eliminar(Integer id) {
         this.iFacturaRepository.eliminar(id);
     }
 

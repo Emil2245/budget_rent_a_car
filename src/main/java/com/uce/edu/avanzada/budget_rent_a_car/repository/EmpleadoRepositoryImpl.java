@@ -15,6 +15,7 @@ public class EmpleadoRepositoryImpl implements IEmpleadoRepository {
     private EntityManager entityManager;
 
     @Override
+    @Transactional(Transactional.TxType.MANDATORY)
     public void insertar(Empleado empleado) {
         this.entityManager.persist(empleado);
     }

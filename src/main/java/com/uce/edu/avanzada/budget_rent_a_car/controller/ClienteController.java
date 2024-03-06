@@ -61,7 +61,7 @@ public class ClienteController {
     @PostMapping("/registrarDesdeCliente")
     public String registrarDesdeCliente(Cliente cliente) {
         cliente.setRegistro("C"); // C -> Cliente
-        this.iClienteService.crear(cliente);
+        this.iClienteService.guardar(cliente);
 
         return "redirect:/clientes/inicioClientes";
     }
@@ -70,7 +70,7 @@ public class ClienteController {
     @PostMapping("/registrarDesdeEmpleado")
     public String registrarDesdeEmpleado(Cliente cliente) {
         cliente.setRegistro("E"); // E -> Empleado
-        this.iClienteService.crear(cliente);
+        this.iClienteService.guardar(cliente);
 
         return "redirect:/empleados/inicio";
     }

@@ -23,6 +23,19 @@ public class ClienteDTO {
 		this.total = total;
 	}
 
+	//////////////////////////////////////////
+
+	@Override
+	public String toString() {
+		return "ClienteDTO{" +
+				"cedula='" + cedula + '\'' +
+				", nombre='" + nombre + '\'' +
+				", apellido='" + apellido + '\'' +
+				", iva=" + iva +
+				", total=" + total +
+				'}';
+	}
+
 	// Set y Get
 	public String getCedula() {
 		return cedula;
@@ -65,11 +78,5 @@ public class ClienteDTO {
 	}
 
 	// To String
-
-	@Override
-	public String toString() {
-		return "ClienteDTO [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", iva=" + iva
-				+ ", total=" + total + "]";
-	}
 
 }

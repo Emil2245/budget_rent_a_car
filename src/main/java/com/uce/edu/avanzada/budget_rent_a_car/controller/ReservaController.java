@@ -44,7 +44,7 @@ public class ReservaController {
 
         //Controlar fallo de placa y cedula---
         try {
-            estaVehiculoDisponible = !this.iReservaService.verificar(fechaInicio, fechaFin, placa);
+            estaVehiculoDisponible = !this.iReservaService.verificarDisponibilidad(fechaInicio, fechaFin, placa);
         } catch (Exception exception) {
 
             if (reservaClienteTO.isAuxSinReserva())  // Si viene http://localhost:8085/reservas/mostrarRetirarSinReserva
@@ -128,7 +128,7 @@ public class ReservaController {
     @GetMapping("/retirarSinReserva/{codigoReserva}")
     public String retirarSinReserva(@PathVariable(value = "codigoReserva") String codigoReserva) {
         try {
-            this.iReservaService.retirar(codigoReserva);
+            this.iReservaService.actualizarPorCodigoReserva(codigoReserva);
         } catch (Exception e) {
             return "reservas/vistaRetirarSinReservaInicio";
         }

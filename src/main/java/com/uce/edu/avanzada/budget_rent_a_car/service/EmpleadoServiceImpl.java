@@ -2,6 +2,7 @@ package com.uce.edu.avanzada.budget_rent_a_car.service;
 
 import com.uce.edu.avanzada.budget_rent_a_car.repository.IEmpleadoRepository;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Empleado;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,13 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     @Autowired
     private IEmpleadoRepository iEmpleadoRepository;
     @Override
-    public void ingresar(Empleado empleado) {
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void guardar(Empleado empleado) {
         this.iEmpleadoRepository.insertar(empleado);
     }
 
     @Override
+    @Transactional(Transactional.TxType.NOT_SUPPORTED)
     public Empleado buscarPorId(Integer id) {
         return this.iEmpleadoRepository.seleccionar(id);
     }

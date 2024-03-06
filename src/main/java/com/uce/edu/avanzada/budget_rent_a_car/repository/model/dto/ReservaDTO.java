@@ -18,7 +18,6 @@ public class ReservaDTO {
 	private BigDecimal total;
 
 	public ReservaDTO() {
-		super();
 	}
 
 	public ReservaDTO(String placa, String cedula, LocalDate fechaInicio, LocalDate fechaFin, String numeroTarjeta,
@@ -31,6 +30,20 @@ public class ReservaDTO {
 		this.numeroTarjeta = numeroTarjeta;
 		this.total = total;
 	}
+//////////////////////////////////////////////////
+
+	@Override
+	public String toString() {
+		return "ReservaDTO{" +
+				"placa='" + placa + '\'' +
+				", cedula='" + cedula + '\'' +
+				", fechaInicio=" + fechaInicio +
+				", fechaFin=" + fechaFin +
+				", numeroTarjeta='" + numeroTarjeta + '\'' +
+				", total=" + total +
+				'}';
+	}
+
 
 	// Set and Get
 

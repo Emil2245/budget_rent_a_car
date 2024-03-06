@@ -52,23 +52,24 @@ public class ReservaServiceImpl implements IReservaService {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public Reserva buscar(Integer id) {
+    public Reserva buscarPorId(Integer id) {
         return this.iReservaRepository.seleccionar(id);
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED)
-    public void borrar(Integer id) {
+    public void eliminar(Integer id) {
         this.iReservaRepository.eliminar(id);
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED)
-    public Boolean verificar(LocalDate inicio, LocalDate fin, String placa) {
+    public Boolean verificarDisponibilidad(LocalDate inicio, LocalDate fin, String placa) {
         Vehiculo v = this.iVehiculoRepository.buscarPlaca(placa);
-        List<Reserva> reservas = this.iReservaRepository.seleccionarReportesEntreFechas(inicio, fin);
 
-        return reservas.parallelStream().anyMatch(x -> x.getVehiculo().getId().equals(v.getId()));
+        return this.iReservaRepository.seleccionarReportesEntreFechas(inicio, fin)
+                .parallelStream()
+                .anyMatch(x -> x.getVehiculo().getId().equals(v.getId()));
     }
 
     @Override
@@ -84,7 +85,7 @@ public class ReservaServiceImpl implements IReservaService {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin) {
+    public List<Reserva> buscararReportesEntreFechas(LocalDate inicio, LocalDate fin) {
         return this.iReservaRepository.seleccionarReportesEntreFechas(inicio, fin);
     }
 
@@ -137,7 +138,7 @@ public class ReservaServiceImpl implements IReservaService {
 
     @Override
     @Transactional(value = TxType.REQUIRED)
-    public void aplicar(String codigo) {
+    public void reservarEstado(String codigo) {
         Reserva reserva = this.iReservaRepository.seleccionarPorCodigo(codigo);
         Vehiculo vehiculo = reserva.getVehiculo();
 
@@ -161,13 +162,14 @@ public class ReservaServiceImpl implements IReservaService {
     }
 
 	@Override
-	public void retirar(String codigoReserva) {
+    @Transactional(TxType.REQUIRED)
+	public void actualizarPorCodigoReserva(String codigoReserva) {
 		this.iReservaRepository.actualizarPorCodigoReserva(codigoReserva);
 		
 	}
 
 	@Override
-	public List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin) {
+	public List<ReporteDTO> listarReporteReservasDTO(LocalDate inicio, LocalDate fin) {
 		// TODO Auto-generated method stub
 		return this.iReservaRepository.reporteDeReservasDTO(inicio, fin);
 	}

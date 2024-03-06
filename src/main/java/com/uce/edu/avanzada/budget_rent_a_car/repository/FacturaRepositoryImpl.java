@@ -14,28 +14,28 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional(value = TxType.MANDATORY)
     @Override
+    @Transactional(value = TxType.MANDATORY)
     public void insertar(Factura factura) {
         this.entityManager.persist(factura);
 
     }
 
-    @Transactional(value = TxType.MANDATORY)
     @Override
+    @Transactional(value = TxType.MANDATORY)
     public void actualizar(Factura factura) {
         this.entityManager.merge(factura);
 
     }
 
-    @Transactional(value = TxType.MANDATORY)
     @Override
+    @Transactional(value = TxType.MANDATORY)
     public void eliminar(Integer id) {
         this.entityManager.remove(this.seleccionar(id));
     }
 
-    @Transactional(value = TxType.NOT_SUPPORTED)
     @Override
+    @Transactional(value = TxType.NOT_SUPPORTED)
     public Factura seleccionar(Integer id) {
         return this.entityManager.find(Factura.class, id);
     }

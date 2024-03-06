@@ -30,8 +30,8 @@ public class VehiculoServiceImpl implements IVehiculoService {
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
-	public Vehiculo encontrar(Integer id) {
-		return this.vehiculoRepository.buscar(id);
+	public Vehiculo buscarPorId(Integer id) {
+		return this.vehiculoRepository.seleccionar(id);
 	}
 
 	@Override
@@ -54,29 +54,14 @@ public class VehiculoServiceImpl implements IVehiculoService {
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
-	public List<Vehiculo> vehiculosVIP(LocalDate fecha) {
-		List<Vehiculo> vehiculos = this.vehiculoRepository.reporteVehiculo(fecha);
-		List<Vehiculo> vehiculosVIP = vehiculos.stream()
-				.sorted(Comparator.comparingDouble(
-						a -> a.getReservas().stream().map(b -> b.getTotal().doubleValue()).reduce(0.0, Double::sum)))
-				.collect(Collectors.toList());
-		vehiculosVIP.parallelStream().forEach(a -> {
-			a.setValorDia(new BigDecimal(this.calcularSubtotal(a)));
-			a.setPaisFabricacion(this.calcularTotal(a).toString());
-		});
-		Collections.reverse(vehiculosVIP);
-		return vehiculosVIP;
+	public List<Vehiculo> buscarTodos() {
+		return this.vehiculoRepository.seleccionarTodos();
 	}
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
-	public List<Vehiculo> buscarTodos() {
-		return this.vehiculoRepository.buscarTodos();
-	}
-
-	@Override
 	public List<Vehiculo> buscarTodosSoloDisponibles() {
-		return this.vehiculoRepository.buscarTodosSoloDisponibles();
+		return this.vehiculoRepository.seleccionarTodosSoloDisponibles();
 	}
 
 	@Override
@@ -89,8 +74,9 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	@Override
 	public Double calcularTotal(Vehiculo vehiculo) {
 		List<Reserva> lista = vehiculo.getReservas();
-		Double total = lista.parallelStream().map(b -> b.getTotal().doubleValue()).reduce(0.0, Double::sum);
-		return total;
+        return lista.parallelStream()
+				.map(b -> b.getTotal().doubleValue())
+				.reduce(0.0, Double::sum);
 	}
 
 	@Override
@@ -106,18 +92,14 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Vehiculo> buscarVehiculosPorMarcaYModelo(String marca, String modelo) {
-		return this.vehiculoRepository.buscar(marca, modelo);
+		return this.vehiculoRepository.seleccionarTodos(marca, modelo);
 	}
 
-	@Override
-	public List<Vehiculo> encontrarTodos() {
-		return null;
-	}
 
 	@Override
 	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Vehiculo> reporteAvaluo(String avaluo) {
-		return this.vehiculoRepository.buscarAvaluo(avaluo);
+		return this.vehiculoRepository.seleccionarAvaluo(avaluo);
 	}
 
 }

@@ -14,15 +14,12 @@ public class ReporteDTO {
 	private BigDecimal subtotal;
 	private BigDecimal total;
 	private String estado;
+
 	//SET Y GET
-	
-	
 	public String getCedula() {
 		return cedula;
 	}
 	public ReporteDTO() {
-		super();
-		
 	}
 	
 	public ReporteDTO(String cedula, String nombre, String apellido, String placa, String modelo, LocalDate fechaInicio,
