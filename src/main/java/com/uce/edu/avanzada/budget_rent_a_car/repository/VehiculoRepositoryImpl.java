@@ -1,7 +1,6 @@
 package com.uce.edu.avanzada.budget_rent_a_car.repository;
 
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
-import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.VehiculoDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;

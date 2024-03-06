@@ -5,11 +5,9 @@ import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReservaDTO;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IClienteService;
-import com.uce.edu.avanzada.budget_rent_a_car.service.IEmpleadoService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IReservaService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IVehiculoService;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +31,7 @@ public class EmpleadoController {
     @Autowired
     private IReservaService iReservaService;
 
-    private static final Logger LOG = Logger.getLogger(EmpleadoController.class);
 
-    @Autowired
-    private IEmpleadoService iEmpleadoService;
 
     // http://localhost:8085/empleados/inicio
     @GetMapping("/inicio")
@@ -83,7 +78,7 @@ public class EmpleadoController {
 
             lista.add(this.iClienteService.buscarPorCedula(cliente.getCedula()));
         } catch (Exception e) {
-            return "vistaCedulaCliente";
+            return "redirect:/empleados/buscar_cliente";
 
         }
 
@@ -116,9 +111,12 @@ public class EmpleadoController {
     @GetMapping("/vehiculos_placa")
     public String vehiculosP(Vehiculo vehiculo, Model modelo) {
         List<Vehiculo> lista = new ArrayList<>();
-        lista.add(this.iVehiculoService.buscarPlaca(vehiculo.getPlaca()));
+        try {
+        	lista.add(this.iVehiculoService.buscarPlaca(vehiculo.getPlaca()));
+		} catch (Exception e) {
+			return "redirect:/empleados/buscar_placa";
+		}
         modelo.addAttribute("lista", lista);
-
         return "vistaVehiculosPlaca";
     }
 
@@ -143,19 +141,25 @@ public class EmpleadoController {
 
     @GetMapping("/confirmacion_reserva")
     public String confirmacionReserva(ReservaDTO reservaDTO, Model model, HttpSession session) {
-        if (this.iReservaService.verificar(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
-                reservaDTO.getPlaca())) {
-            LOG.warn("Error al confirmar su reserva");
-            return "vistaError";
-        } else {
-            var total = this.iReservaService
-                    .calcularValorTotal(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(), reservaDTO.getPlaca())
-                    .get(2);
-            model.addAttribute("total", total);
-            session.setAttribute("reserva", reservaDTO);
+        try {
+        	if (this.iReservaService.verificar(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
+                    reservaDTO.getPlaca())) {
+                return "vistaError";
+            } else {
+                var total = this.iReservaService
+                        .calcularValorTotal(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(), reservaDTO.getPlaca())
+                        .get(2);
+                model.addAttribute("total", total);
+                session.setAttribute("reserva", reservaDTO);
 
-            return "vistaConfirmacionReserva";
-        }
+                return "vistaConfirmacionReserva";
+            }
+		} catch (Exception e) {
+			return "redirect:/empleados/reservar";
+		}
+    	
+    	
+    	
 
     }
 
@@ -165,7 +169,7 @@ public class EmpleadoController {
         String codigo = this.iReservaService.reservar(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
                 reservaDTO.getPlaca(), reservaDTO.getCedula(), reserva.getNumeroTarjeta());
         model.addAttribute("codigo", codigo);
-        return "vistaPrincipalEmpleados";
+        return "vistaRetiro";
     }
 
     @GetMapping("/retirar_reservado")

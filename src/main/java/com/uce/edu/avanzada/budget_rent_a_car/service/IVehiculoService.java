@@ -1,7 +1,6 @@
 package com.uce.edu.avanzada.budget_rent_a_car.service;
 
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
-import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.VehiculoDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,8 +23,6 @@ public interface IVehiculoService {
 
 	// BUSCAR PLACA
 	Vehiculo buscarPlaca(String placa);
-	
-	
 
 	List<Vehiculo> encontrarTodos();
 
@@ -33,12 +30,13 @@ public interface IVehiculoService {
 	List<Vehiculo> vehiculosVIP(LocalDate fecha);
 
 	List<Vehiculo> buscarTodos();
+
 	List<Vehiculo> buscarTodosSoloDisponibles();
 
 	Double calcularSubtotal(Vehiculo vehiculo);
 
 	Double calcularTotal(Vehiculo vehiculo);
-	
+
 	List<Vehiculo> reporteAvaluo(String avaluo);
 
 }

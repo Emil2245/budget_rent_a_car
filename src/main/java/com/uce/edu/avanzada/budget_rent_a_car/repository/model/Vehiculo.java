@@ -42,7 +42,7 @@ public class Vehiculo {
     @Column(name = "vehi_valor_dia")
     private BigDecimal valorDia;
 
-    @Column(name = "vehi_url_imagen")
+    @Column(name = "vehi_url_imagen", length = 1000)
     private String urlImagen;
 
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
