@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 public class EmpleadoServiceImpl implements IEmpleadoService {
 
     @Autowired
-    private IEmpleadoRepository empleadoRepository;
+    private IEmpleadoRepository iEmpleadoRepository;
     @Override
     public void ingresar(Empleado empleado) {
-        this.empleadoRepository.ingresar(empleado);
+        this.iEmpleadoRepository.insertar(empleado);
     }
 
     @Override
     public Empleado buscarPorId(Integer id) {
-        return this.buscarPorId(id);
+        return this.iEmpleadoRepository.seleccionar(id);
     }
 
     public String siguienteVista(String user, String pass) {

@@ -24,15 +24,6 @@ public class ClienteRepositoryImpl implements IClienteRepository {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public Cliente buscarPorCedula(String cedula) {
-        return this.entityManager
-                .createQuery("SELECT c FROM Cliente c WHERE c.cedula=:datoCedula", Cliente.class)
-                .setParameter("datoCedula", cedula)
-                .getSingleResult();
-    }
-
-    @Override
-    @Transactional(value = TxType.NOT_SUPPORTED)
     public Cliente seleccionarPorCedula(String cedula) {
         return this.entityManager
                 .createQuery("SELECT c FROM Cliente c WHERE c.cedula=:datoCedula", Cliente.class)
@@ -42,7 +33,7 @@ public class ClienteRepositoryImpl implements IClienteRepository {
 
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
-    public List<Cliente> seleccionarTodos() {
+    public List<Cliente> seleccionarTodosClientes() {
         return this.entityManager
                 .createQuery("SELECT c FROM Cliente c", Cliente.class)
                 .getResultList();

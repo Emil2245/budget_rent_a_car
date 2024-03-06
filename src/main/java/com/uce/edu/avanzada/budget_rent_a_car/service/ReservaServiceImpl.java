@@ -66,7 +66,7 @@ public class ReservaServiceImpl implements IReservaService {
     @Transactional(value = TxType.REQUIRED)
     public Boolean verificar(LocalDate inicio, LocalDate fin, String placa) {
         Vehiculo v = this.iVehiculoRepository.buscarPlaca(placa);
-        List<Reserva> reservas = this.iReservaRepository.reporteReserva(inicio, fin);
+        List<Reserva> reservas = this.iReservaRepository.seleccionarReportesEntreFechas(inicio, fin);
 
         return reservas.parallelStream().anyMatch(x -> x.getVehiculo().getId().equals(v.getId()));
     }
@@ -75,7 +75,7 @@ public class ReservaServiceImpl implements IReservaService {
     @Transactional(value = TxType.REQUIRED)
     public List<String> calcularIntervaloDias(LocalDate inicio, LocalDate fin, String placa) {
         Vehiculo v = this.iVehiculoRepository.buscarPlaca(placa);
-        List<Reserva> reservas = this.iReservaRepository.reporteReserva(inicio, fin);
+        List<Reserva> reservas = this.iReservaRepository.seleccionarReportesEntreFechas(inicio, fin);
         return reservas.parallelStream()
                 .filter(reserva -> reserva.getVehiculo().getId().equals(v.getId()))
                 .map(reserva ->  "\nDesde: "+reserva.getFechaInicio()+" / Hasta: "+ reserva.getFechaFin()+ "\n")
@@ -85,7 +85,7 @@ public class ReservaServiceImpl implements IReservaService {
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
     public List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin) {
-        return this.iReservaRepository.reporteReserva(inicio, fin);
+        return this.iReservaRepository.seleccionarReportesEntreFechas(inicio, fin);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class ReservaServiceImpl implements IReservaService {
     @Transactional(value = TxType.REQUIRED)
     public String reservar(LocalDate inicio, LocalDate fin, String placa, String cedula, String tarjeta) {
         Vehiculo vehiculo = this.iVehiculoRepository.buscarPlaca(placa);
-        Cliente cliente = this.iClienteRepository.buscarPorCedula(cedula);
+        Cliente cliente = this.iClienteRepository.seleccionarPorCedula(cedula);
 
         Reserva reserva = new Reserva();
         reserva.setCliente(cliente);
@@ -138,7 +138,7 @@ public class ReservaServiceImpl implements IReservaService {
     @Override
     @Transactional(value = TxType.REQUIRED)
     public void aplicar(String codigo) {
-        Reserva reserva = this.iReservaRepository.buscarCodigo(codigo);
+        Reserva reserva = this.iReservaRepository.seleccionarPorCodigo(codigo);
         Vehiculo vehiculo = reserva.getVehiculo();
 
         reserva.setEstado("E");
@@ -152,7 +152,7 @@ public class ReservaServiceImpl implements IReservaService {
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
     public String getReserva(String codigo) {
-        Reserva reserva = this.iReservaRepository.buscarCodigo(codigo);
+        Reserva reserva = this.iReservaRepository.seleccionarPorCodigo(codigo);
 
         return String.format("Placa: %s - Modelo: %s – Estado: %s – Fecha: %s-%s – Reservado por: %s",
                 reserva.getVehiculo().getPlaca(), reserva.getVehiculo().getModelo(),
@@ -162,7 +162,7 @@ public class ReservaServiceImpl implements IReservaService {
 
 	@Override
 	public void retirar(String codigoReserva) {
-		this.iReservaRepository.retirar(codigoReserva);
+		this.iReservaRepository.actualizarPorCodigoReserva(codigoReserva);
 		
 	}
 

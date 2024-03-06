@@ -7,10 +7,9 @@ import java.util.List;
 public interface IClienteRepository {
 
     void insertar(Cliente cliente);
-    Cliente buscarPorCedula(String cedula);
 
     Cliente seleccionarPorCedula(String cedula);
 
-    List<Cliente> seleccionarTodos();
+    List<Cliente> seleccionarTodosClientes();
 
 }

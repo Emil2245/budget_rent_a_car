@@ -31,7 +31,7 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     @Transactional(value = TxType.NOT_SUPPORTED)
     public List<Cliente> verClientes() {
-        return this.iClienteRepository.seleccionarTodos();
+        return this.iClienteRepository.seleccionarTodosClientes();
     }
 
 }

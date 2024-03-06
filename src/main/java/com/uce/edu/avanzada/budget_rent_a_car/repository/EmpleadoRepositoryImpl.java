@@ -15,28 +15,14 @@ public class EmpleadoRepositoryImpl implements IEmpleadoRepository {
     private EntityManager entityManager;
 
     @Override
-    public void ingresar(Empleado empleado) {
+    public void insertar(Empleado empleado) {
         this.entityManager.persist(empleado);
     }
 
     @Override
-    public Empleado buscar(Integer id) {
+    public Empleado seleccionar(Integer id) {
         return this.entityManager.find(Empleado.class, id);
     }
 
-    @Override
-    public Empleado buscarUser(String user) {
-        TypedQuery<Empleado> query =
-                this.entityManager
-                        .createQuery("SELECT e FROM Empleado e WHERE e.usuario = :datoUsuario", Empleado.class)
-                        .setParameter("datoUsuario", user);
-        try {
-            return query.getSingleResult();
-        } catch (Exception e) {
-            System.err.println("No se encontro el usuario");
-            return null;
-
-        }
-    }
 
 }

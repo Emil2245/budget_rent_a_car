@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface IClienteService {
     void crear(Cliente cliente);
-
     Cliente buscarPorCedula(String cedula);
-
     List<Cliente> verClientes();
 
 }

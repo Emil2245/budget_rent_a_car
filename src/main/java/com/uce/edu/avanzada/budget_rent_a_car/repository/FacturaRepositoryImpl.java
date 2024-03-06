@@ -31,15 +31,12 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
     @Transactional(value = TxType.MANDATORY)
     @Override
     public void eliminar(Integer id) {
-        Factura fac = this.seleccionar(id);
-        this.entityManager.remove(fac);
-
+        this.entityManager.remove(this.seleccionar(id));
     }
 
     @Transactional(value = TxType.NOT_SUPPORTED)
     @Override
     public Factura seleccionar(Integer id) {
-
         return this.entityManager.find(Factura.class, id);
     }
 

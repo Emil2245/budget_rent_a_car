@@ -45,14 +45,8 @@ public class ReporteController {
         return "vListaReporteReserva";
     }
 
-
-    //	@GetMapping("/reservasdto")
-//	public String reporteReservasDTO(Reserva Reserva) {
-//		return "vReporteReserva";
-//	}
     @GetMapping("/verReporteReserva")
     public String reporteReserva(ReservaClienteTO reservaClienteTO, Model model) {
-        //List<ReporteDTO> reporte = this.iReservaService.reporteDeReservasDTO(reservaClienteTO.getFechaInicioReserva(), reservaClienteTO.getFechaFinReserva());
 
         model.addAttribute("reservaClienteTO", new ReservaClienteTO());
 

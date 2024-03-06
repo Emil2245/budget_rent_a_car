@@ -16,14 +16,12 @@ public interface IReservaRepository {
 
     void eliminar(Integer id);
     
-    void retirar(String codigoReserva);
+    void actualizarPorCodigoReserva(String codigoReserva);
 
-    List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin);
+    List<Reserva> seleccionarReportesEntreFechas(LocalDate inicio, LocalDate fin);
 
-    Reserva buscarCodigo(String codigo);
+    Reserva seleccionarPorCodigo(String codigo);
 
-    List<Reserva> buscarClientesVip();
-    
     List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin);
 
 }

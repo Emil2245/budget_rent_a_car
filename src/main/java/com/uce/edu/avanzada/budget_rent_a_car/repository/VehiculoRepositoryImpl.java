@@ -42,16 +42,6 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
         this.entityManager.remove(vehi);
     }
 
-    // actualizar estado del vehiculo por placa
-    @Override
-    @Transactional(value = TxType.MANDATORY)
-    public Integer actualizarEstado(String placa) {
-        return this.entityManager
-                .createQuery("UPDATE Vehiculo v SET v.placa = 'ND' WHERE v.placa = :datoPlaca", Vehiculo.class)
-                .setParameter("datoPlaca", placa)
-                .executeUpdate();
-    }
-
     // Obtener vehiculoDTO por placa
    
 

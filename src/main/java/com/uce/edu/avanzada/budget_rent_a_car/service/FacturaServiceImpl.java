@@ -10,30 +10,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class FacturaServiceImpl implements IFacturaService {
     @Autowired
-    private IFacturaRepository facturaRepository;
+    private IFacturaRepository iFacturaRepository;
 
     @Override
     @Transactional(value = TxType.REQUIRED)
     public void guardar(Factura factura) {
-        this.facturaRepository.insertar(factura);
+        this.iFacturaRepository.insertar(factura);
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED)
     public void actualizar(Factura factura) {
-        this.facturaRepository.actualizar(factura);
+        this.iFacturaRepository.actualizar(factura);
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED)
     public void borrar(Integer id) {
-        this.facturaRepository.eliminar(id);
+        this.iFacturaRepository.eliminar(id);
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED)
     public Factura buscar(Integer id) {
-        return this.facturaRepository.seleccionar(id);
+        return this.iFacturaRepository.seleccionar(id);
     }
 
 }

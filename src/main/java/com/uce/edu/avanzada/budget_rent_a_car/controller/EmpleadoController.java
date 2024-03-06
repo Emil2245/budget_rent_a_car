@@ -4,7 +4,6 @@ import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReservaDTO;
-import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.VehiculoDTO;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IClienteService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IEmpleadoService;
 import com.uce.edu.avanzada.budget_rent_a_car.service.IReservaService;
@@ -51,7 +50,6 @@ public class EmpleadoController {
         return "redirect:/empleados/inicio";
     }
 
-    // Funcionalidad 2a
     @GetMapping("/lista_clientes")
     public String buscarClientes(Model modelo) {
         List<Cliente> listaClientes = this.iClienteService.verClientes();

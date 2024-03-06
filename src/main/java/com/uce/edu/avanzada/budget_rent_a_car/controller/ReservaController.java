@@ -50,7 +50,8 @@ public class ReservaController {
             if (reservaClienteTO.isAuxSinReserva())  // Si viene http://localhost:8085/reservas/mostrarRetirarSinReserva
                 return "reservas/vistaRetirarSinReservaInicio";
             return "clientes/vistaClientes";
-        }// ---------
+        }
+        // ---------
 
         if (!estaVehiculoDisponible) {
             // TODO Falta funcionalidad para esto en service
