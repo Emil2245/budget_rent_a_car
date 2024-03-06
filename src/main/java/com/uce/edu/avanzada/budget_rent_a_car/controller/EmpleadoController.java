@@ -110,10 +110,10 @@ public class EmpleadoController {
     public String vehiculosP(Vehiculo vehiculo, Model modelo) {
         List<Vehiculo> lista = new ArrayList<>();
         try {
-        	lista.add(this.iVehiculoService.buscarPlaca(vehiculo.getPlaca()));
-		} catch (Exception e) {
-			return "redirect:/empleados/buscar_placa";
-		}
+            lista.add(this.iVehiculoService.buscarPlaca(vehiculo.getPlaca()));
+        } catch (Exception e) {
+            return "redirect:/empleados/buscar_placa";
+        }
         modelo.addAttribute("lista", lista);
         return "vistaVehiculosPlaca";
     }
@@ -139,8 +139,15 @@ public class EmpleadoController {
 
     @GetMapping("/confirmacion_reserva")
     public String confirmacionReserva(ReservaDTO reservaDTO, Model model, HttpSession session) {
+
         try {
-        	if (this.iReservaService.verificarDisponibilidad(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
+            this.iClienteService.buscarPorCedula(reservaDTO.getCedula());
+        } catch (Exception e) {
+            return "redirect:/empleados/reservar";
+        }
+
+        try {
+            if (this.iReservaService.verificarDisponibilidad(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
                     reservaDTO.getPlaca())) {
                 return "vistaError";
             } else {
@@ -152,9 +159,9 @@ public class EmpleadoController {
 
                 return "vistaConfirmacionReserva";
             }
-		} catch (Exception e) {
-			return "redirect:/empleados/reservar";
-		}
+        } catch (Exception e) {
+            return "redirect:/empleados/reservar";
+        }
 
     }
 
