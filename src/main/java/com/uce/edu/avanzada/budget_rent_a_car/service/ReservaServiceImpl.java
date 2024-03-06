@@ -8,6 +8,8 @@ import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Cliente;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Factura;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Vehiculo;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReporteDTO;
+
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,6 +164,12 @@ public class ReservaServiceImpl implements IReservaService {
 	public void retirar(String codigoReserva) {
 		this.iReservaRepository.retirar(codigoReserva);
 		
+	}
+
+	@Override
+	public List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin) {
+		// TODO Auto-generated method stub
+		return this.reporteDeReservasDTO(inicio, fin);
 	}
 
 }

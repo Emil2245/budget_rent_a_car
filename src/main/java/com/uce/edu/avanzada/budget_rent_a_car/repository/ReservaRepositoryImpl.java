@@ -1,13 +1,17 @@
 package com.uce.edu.avanzada.budget_rent_a_car.repository;
 
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
+import com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReporteDTO;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -84,4 +88,16 @@ public class ReservaRepositoryImpl implements IReservaRepository {
 		consulta.executeUpdate();
 	}
 
+	@Override
+	public List<ReporteDTO> reporteDeReservasDTO(LocalDate inicio, LocalDate fin) {
+		String jpql= "SELECT new com.uce.edu.avanzada.budget_rent_a_car.repository.model.dto.ReporteDTO(c.cedula, c.nombre, c.apellido, v.placa, v.modelo, r.fechaInicio, r.fechaFin, r.subtotal, r.total, r.estado) FROM Reserva r JOIN r.cliente c JOIN r.vehiculo v "
+				+ "WHERE r.fechaInicio BETWEEN :datoFechaInicio AND :datoFechaFinal AND r.fechaFin "
+				+ "BETWEEN :datoFechaInicio AND :datoFechaFinal";
+		TypedQuery<ReporteDTO> consulta= this.entityManager.createQuery(jpql,ReporteDTO.class);
+		consulta.setParameter("datoFechaInicio", inicio.minusDays(1));
+		consulta.setParameter("datoFechaFinal", fin.plusDays(1));
+		return consulta.getResultList();
+	}
+
+	
 }
