@@ -52,19 +52,18 @@ public class ReporteController {
 //	}
 	@GetMapping("/verReporteReserva")
 	public String reporteReserva(ReservaClienteTO reservaClienteTO, Model model) {
-		//List<ReporteDTO> reporte = this.iReservaService.reporteDeReservasDTO(reservaClienteTO.getFechaInicioReserva(), reservaClienteTO.getFechaFinReserva());
-		
-		model.addAttribute("reservaClienteTO",new ReservaClienteTO());
-		
-		
-		try {
-			List<ReporteDTO> reporte = this.iReservaService.reporteDeReservasDTO(reservaClienteTO.getFechaInicioReserva(), reservaClienteTO.getFechaFinReserva());		
-			model.addAttribute("listaReporte",reporte);
-		} catch (Exception e) {
-			model.addAttribute("listaReporte", Arrays.asList(new ReporteDTO()));
-		}
-		return "reservas/vistaReporteReserva";
+	    //List<ReporteDTO> reporte = this.iReservaService.reporteDeReservasDTO(reservaClienteTO.getFechaInicioReserva(), reservaClienteTO.getFechaFinReserva());
+	    
+	    model.addAttribute("reservaClienteTO",new ReservaClienteTO());
+	    
+	    
+	    try {
+	       List<ReporteDTO> reporte = this.iReservaService.reporteDeReservasDTO(reservaClienteTO.getFechaInicioReserva(), reservaClienteTO.getFechaFinReserva());    
+	       model.addAttribute("listaReporte",reporte);
+	    } catch (Exception e) {
+	       model.addAttribute("listaReporte", Arrays.asList(new ReporteDTO()));
+	    }
+	    return "reservas/vistaReporteReserva";
 
 	}
-	
 }
