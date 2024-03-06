@@ -3,6 +3,7 @@ package com.uce.edu.avanzada.budget_rent_a_car.repository;
 import com.uce.edu.avanzada.budget_rent_a_car.repository.model.Reserva;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 import org.springframework.stereotype.Repository;
@@ -74,5 +75,13 @@ public class ReservaRepositoryImpl implements IReservaRepository {
         reservas.parallelStream().forEach(r -> r.getCliente().getCedula());
         return reservas;
     }
+
+	@Override
+	public void retirar(String codigoReserva) {
+		
+		Query consulta= this.entityManager.createQuery("UPDATE Reserva r SET r.estado='E' WHERE r.codigo=:codigoReserva");
+		consulta.setParameter("codigoReserva",codigoReserva);
+		consulta.executeUpdate();
+	}
 
 }

@@ -50,8 +50,15 @@ public class ReservaController {
 			model.addAttribute("fechasDondeEstaOcupado", fechasDondeEstaOcupado);
 			return "reservas/vistaVehiculoNoDisponible";
 		}
-
-		Vehiculo vehiculo = this.iVehiculoService.buscarPlaca(placa);
+		
+		Vehiculo vehiculo ;
+		
+		try {
+			 vehiculo = this.iVehiculoService.buscarPlaca(placa);
+		} catch (Exception e) {
+			return "reservas/vistaRetirarSinReservaInicio";
+		}
+		
 		if (vehiculo.getUrlImagen() == null)
 			vehiculo.setUrlImagen(
 					"https://th.bing.com/th/id/OIG2.rKHSGXziRWnPAtOzQu86?w=1024&h=1024&rs=1&pid=ImgDetMain");
@@ -106,8 +113,12 @@ public class ReservaController {
 
 	@GetMapping("/retirarSinReserva/{codigoReserva}")
 	public String retirarSinReserva(@PathVariable(value = "codigoReserva") String codigoReserva) {
-		// TODO Aqui el codigo que retire la reserva con el codigo pasado por parametro
-		// (URL)
+		try {
+			this.iReservaService.retirar(codigoReserva);
+		} catch (Exception e) {
+			return "reservas/vistaRetirarSinReservaInicio";
+		}
+		
 		return "reservas/vistaRetiradoSinReserva";
 	}
 

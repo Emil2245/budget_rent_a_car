@@ -167,7 +167,7 @@ public class EmpleadoController {
         String codigo = this.iReservaService.reservar(reservaDTO.getFechaInicio(), reservaDTO.getFechaFin(),
                 reservaDTO.getPlaca(), reservaDTO.getCedula(), reserva.getNumeroTarjeta());
         model.addAttribute("codigo", codigo);
-        return "vistaRetirarReserva";
+        return "vistaPrincipalEmpleados";
     }
 
     @GetMapping("/retirar_reservado")
