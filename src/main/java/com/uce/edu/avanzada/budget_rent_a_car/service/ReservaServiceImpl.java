@@ -158,4 +158,10 @@ public class ReservaServiceImpl implements IReservaService {
                 reserva.getFechaFin(), reserva.getCliente().getCedula());
     }
 
+	@Override
+	public void retirar(String codigoReserva) {
+		this.iReservaRepository.retirar(codigoReserva);
+		
+	}
+
 }

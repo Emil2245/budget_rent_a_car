@@ -14,6 +14,8 @@ public interface IReservaRepository {
     Reserva seleccionar(Integer id);
 
     void eliminar(Integer id);
+    
+    void retirar(String codigoReserva);
 
     List<Reserva> reporteReserva(LocalDate inicio, LocalDate fin);
 

@@ -28,6 +28,7 @@ public interface IReservaService {
 	void aplicar(String reserva);
 
 	String getReserva(String codigo);
+	void retirar(String codigoReserva);
 	
 
 }
