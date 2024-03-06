@@ -24,43 +24,43 @@
     </div>
 
 </header>
-<h1 class="text-center"
-    style=" font-size: 80px; color: orangered; font-weight: bold;"> Bienvenido
-</h1>
-<h3 class="text-center" style=" color: #000000; font-weight: bold;"> Empleado de Renta Car </h3>
 
-<div class="d-grid gap-2 col-6 mx-auto" style="margin-bottom: 10px;">
-    <button class="btn btn-dark" onclick="window.location.href='/clientes/nuevoClienteDesdeEmpleado'">
-        Registrar cliente
-    </button>
-</div>
+<h1 class="text-center text-warning fw-bold" style="font-size: 4em;">Bienvenido</h1>
+<main class="contenedor-mediano bg-light rounded-3 d-flex flex-column gap-2 p-5">
+    <h3 class="text-center" style=" color: #000000; font-weight: bold;"> Empleado de Renta Car </h3>
 
-<form th:action="@{/empleados/buscar_cliente}" th:method="GET" style="margin-bottom: 10px;">
     <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Buscar cliente">
+        <button class="btn btn-dark btn-lg" onclick="window.location.href='/clientes/nuevoClienteDesdeEmpleado'">
+            Registrar cliente
+        </button>
     </div>
-</form>
-<form th:action="@{/empleados/nuevo_vehiculo}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Ingresar un vehículo">
-    </div>
-</form>
-<form th:action="@{/clientes/inicioClientes}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Buscar vehículo">
-    </div>
-</form>
-<form th:action="@{/empleados/retirar_vehiculo}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Retirar un vehículo reservado">
-    </div>
-</form>
-<form th:action="@{/reservas/mostrarRetirarSinReserva}" th:method="GET" style="margin-bottom: 10px;">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <input class="btn btn-dark" type="submit" value="Retirar un vehículo sin reserva">
-    </div>
-</form>
 
+    <form th:action="@{/empleados/buscar_cliente}" th:method="GET">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <input class="btn btn-dark btn-lg" type="submit" value="Buscar cliente">
+        </div>
+    </form>
+    <form th:action="@{/empleados/nuevo_vehiculo}" th:method="GET">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <input class="btn btn-dark btn-lg" type="submit" value="Ingresar un vehículo">
+        </div>
+    </form>
+    <form th:action="@{/clientes/inicioClientes}" th:method="GET">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <input class="btn btn-dark btn-lg" type="submit" value="Buscar vehículo">
+        </div>
+    </form>
+    <form th:action="@{/empleados/retirar_vehiculo}" th:method="GET">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <input class="btn btn-dark btn-lg" type="submit" value="Retirar un vehículo reservado">
+        </div>
+    </form>
+    <form th:action="@{/reservas/mostrarRetirarSinReserva}" th:method="GET">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <input class="btn btn-dark btn-lg" type="submit" value="Retirar un vehículo sin reserva">
+        </div>
+    </form>
+</main>
 
 </body>
 
